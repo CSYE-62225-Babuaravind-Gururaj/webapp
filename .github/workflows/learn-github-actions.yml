@@ -1,11 +1,14 @@
-name: learn-github-actions
+name: Test Action
+
 on:
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: go-action
+    name: Build
     steps:
       - uses: actions/checkout@v4
       - name: Set up Go
