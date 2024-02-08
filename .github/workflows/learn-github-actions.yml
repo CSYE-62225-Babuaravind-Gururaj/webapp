@@ -2,10 +2,12 @@ name: Test Action
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
