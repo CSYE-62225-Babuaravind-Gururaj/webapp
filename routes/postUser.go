@@ -6,11 +6,17 @@ import (
 	"cloud-proj/health-check/utils"
 	"log"
 	"net/http"
+	"regexp"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
+
+func validateEmail(email string) bool {
+	var emailRegex = regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
+	return emailRegex.MatchString(email)
+}
 
 func CreateUserRoute(c *gin.Context) {
 	var jsonMap map[string]interface{}
@@ -49,9 +55,11 @@ func CreateUserRoute(c *gin.Context) {
 		c.JSON(http.StatusForbidden, gin.H{"error": "Error hashing password"})
 		return
 	}
-	// else {
-	// 	log.Println("Hashed password is:", hashedPassword)
-	// }
+
+	if !validateEmail(input.Username) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Enter Valid Email"})
+		return
+	}
 
 	user := models.User{
 		FirstName:      input.FirstName,
