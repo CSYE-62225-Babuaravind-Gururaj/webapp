@@ -34,7 +34,7 @@ func InitDB() {
 
 	err = DB.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";").Error
 	if err != nil {
-		log.Fatalf("Failed to create extension 'uuid-ossp': %v", err)
+		log.Fatalf("Failed to create extension 'uuid-ossp ': %v", err)
 	}
 
 	log.Println("mirgating")
