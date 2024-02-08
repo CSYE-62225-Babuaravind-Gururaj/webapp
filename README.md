@@ -9,7 +9,7 @@
     Database (PostgreSQL) installed and running on your machine. The application will bootstrap the database schema automatically upon startup using the GORM.
 
 ## Steps to implement the project
-    Create an environment variable(will be automatically configured in future versions)
+    Create an environment variable(will be automatically configured in future versions).
 
         Configure the following environment variables in a .env file or in your environment before running the application:
 
