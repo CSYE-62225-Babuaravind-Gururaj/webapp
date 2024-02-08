@@ -28,24 +28,38 @@ func UpdateUserRoute(c *gin.Context) {
 		return
 	}
 
+	if updateReq.FirstName == "" && updateReq.LastName == "" && updateReq.Password == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "No fields entered"})
+		return
+	}
+
+	if !utils.ValidateName(updateReq.FirstName) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Enter a valid FirstName"})
+		return
+	} else {
+		authUser.FirstName = updateReq.FirstName
+	}
+
+	if !utils.ValidateName(updateReq.LastName) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Enter a valid LastName"})
+		return
+	} else {
+		authUser.LastName = updateReq.LastName
+	}
+
 	if updateReq.UserName != authUser.Username {
 		c.Status(http.StatusUnauthorized)
 	} else {
-		if updateReq.Password != "" {
+		if !utils.ValidatePassword(updateReq.Password) {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Enter a valid Password"})
+			return
+		} else {
 			hashedPassword, err := utils.HashPassword(updateReq.Password)
 			if err != nil {
 				c.JSON(http.StatusUnprocessableEntity, gin.H{"error": "Failed to update user"})
 				return
 			}
 			authUser.Password = hashedPassword
-		}
-
-		if updateReq.FirstName != "" {
-			authUser.FirstName = updateReq.FirstName
-		}
-
-		if updateReq.LastName != "" {
-			authUser.LastName = updateReq.LastName
 		}
 
 		// Saving to DB

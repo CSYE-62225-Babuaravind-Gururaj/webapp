@@ -30,8 +30,6 @@ func InitDB() {
 		log.Fatal("Failed to connect to DB: ", err)
 	}
 
-	// _ = DB.Exec("CREATE DATABASE IF NOT EXISTS " + os.Getenv("DBNAME") + ";")
-
 	err = DB.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";").Error
 	if err != nil {
 		log.Fatalf("Failed to create extension 'uuid-ossp ': %v", err)

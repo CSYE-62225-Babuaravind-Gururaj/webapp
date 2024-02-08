@@ -6,17 +6,11 @@ import (
 	"cloud-proj/health-check/utils"
 	"log"
 	"net/http"
-	"regexp"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
-
-func validateEmail(email string) bool {
-	var emailRegex = regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
-	return emailRegex.MatchString(email)
-}
 
 func CreateUserRoute(c *gin.Context) {
 	var jsonMap map[string]interface{}
@@ -56,8 +50,23 @@ func CreateUserRoute(c *gin.Context) {
 		return
 	}
 
-	if !validateEmail(input.Username) {
+	if !utils.ValidateEmail(input.Username) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Enter Valid Email"})
+		return
+	}
+
+	if !utils.ValidateName(input.FirstName) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Enter Valid First Name"})
+		return
+	}
+
+	if !utils.ValidateName(input.LastName) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Enter Valid Last Name"})
+		return
+	}
+
+	if !utils.ValidatePassword(input.Password) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Password should have a minimum length of 8 characters and should contain at least one letter and one number"})
 		return
 	}
 

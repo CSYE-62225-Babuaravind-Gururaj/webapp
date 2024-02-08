@@ -32,5 +32,3 @@
     Run the application: go run main.go
 
 For testing purposes: https://app.swaggerhub.com/apis-docs/csye6225-webapp/cloud-native-webapp/2024.spring.02
-
-Testing for actions

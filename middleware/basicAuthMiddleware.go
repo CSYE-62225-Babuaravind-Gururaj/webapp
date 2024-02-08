@@ -43,12 +43,12 @@ func BasicAuth() gin.HandlerFunc {
 		// Verify the username and password
 		var user models.User
 		if err := database.DB.Where("username = ?", username).First(&user).Error; err != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Authentication failed"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Authentication failed. Please check the username and password"})
 			return
 		}
 
 		if !utils.CheckPasswordHash(password, user.Password) {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Authentication failed"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Authentication failed. Please check the username and password"})
 			return
 		}
 
