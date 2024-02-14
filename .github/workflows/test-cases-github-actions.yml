@@ -12,13 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: 'Create .env file'
-      run: |
-        echo "DBHOST=${{ secrets.DB_HOST }}" > .env
-        echo "DBPORT=${{ secrets.DB_PORT }}" >> .env
-        echo "DBUSER=${{ secrets.DB_USER }}" >> .env
-        echo "DBPASS=${{ secrets.DB_PASS }}" >> .env
-        echo "DBNAME=${{ secrets.DB_NAME }}" >> .env
+    - name: Create .env file
+      uses: DamianReeves/write-file-action@master
+      with:
+        path: 'src/main/resources/application.yml/.env'
+        contents: |
+          DBHOST=${{ secrets.DB_HOST }}
+          DBPORT=${{ secrets.DB_PORT }}
+          DBUSER=${{ secrets.DB_USER }}
+          DBPASS=${{ secrets.DB_PASS }}
+          DBNAME=${{ secrets.DB_NAME }}
+        write-mode: overwrite
 
     - name: Set up PostgreSQL
       uses: ikalnytskyi/action-setup-postgres@v5
