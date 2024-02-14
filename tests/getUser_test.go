@@ -6,17 +6,17 @@ import (
 	"cloud-proj/health-check/testUtils"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
+
+	"github.com/joho/godotenv"
 )
 
 func TestGetUser(t *testing.T) {
 
-	os.Setenv("DBHOST", "localhost")
-	os.Setenv("DBPORT", "5432")
-	os.Setenv("DBUSER", "postgres")
-	os.Setenv("DBPASS", "root")
-	os.Setenv("DBNAME", "userdb")
+	err := godotenv.Load()
+	if err != nil {
+		t.Fatalf("Error loading .env file: %v", err)
+	}
 
 	database.InitDB()
 

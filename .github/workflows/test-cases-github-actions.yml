@@ -12,12 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: 'Create env file'
+      run: |
+        touch .env
+        echo DBHOST = ${{ secrets.DB_HOST }} > .env
+        echo DBPORT = ${{ secrets.DB_PORT }} > .env
+        echo DBUSER = ${{ secrets.DB_USER }} > .env
+        echo DBPASS = ${{ secrets.DB_PASS }} > .env
+        echo DBNAME = ${{ secrets.DB_NAME }} > .env
+
+
     - name: Set up PostgreSQL
       uses: ikalnytskyi/action-setup-postgres@v5
       with:
         username: ${{ secrets.DB_USER }}
         password: ${{ secrets.DB_PASS }}
-        databse: ${{ secrets.DB_NAME }}
+        database: ${{ secrets.DB_NAME }}
         port: ${{ secrets.DB_PORT }}
     
     - name: Create Database
