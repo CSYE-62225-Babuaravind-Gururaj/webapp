@@ -17,7 +17,7 @@ import (
 
 func TestUpdateUser(t *testing.T) {
 
-	err := godotenv.Load()
+	err := godotenv.Load("../.env")
 	if err != nil {
 		t.Fatalf("Error loading .env file: %v", err)
 	}
