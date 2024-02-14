@@ -20,6 +20,7 @@ jobs:
         databse: ${{ secrets.DB_NAME }}
         port: ${{ secrets.DB_PORT }}
     
+    #Because ikalnytskyi/action-setup-postgres@v5 is not creating a database on it's own
     - name: Create Database
       run: PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -c 'CREATE DATABASE userdb;'
       env:
