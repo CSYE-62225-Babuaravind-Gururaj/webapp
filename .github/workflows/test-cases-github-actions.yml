@@ -22,7 +22,8 @@ jobs:
     
     #Because ikalnytskyi/action-setup-postgres@v5 is not creating a database on it's own
     - name: Create Database
-      run: PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -c "CREATE DATABASE $POSTGRES_DB;"
+      run:
+        PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -tAc "SELECT 1 FROM pg_database WHERE datname='$POSTGRES_DB'" | grep -q 1 || PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -c "CREATE DATABASE $POSTGRES_DB;"
       env:
         POSTGRES_USER: ${{ secrets.DB_USER }}
         POSTGRES_PASSWORD: ${{ secrets.DB_PASS }}
