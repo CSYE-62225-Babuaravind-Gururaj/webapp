@@ -31,11 +31,10 @@ jobs:
     - name: Set up PostgreSQL
       uses: ikalnytskyi/action-setup-postgres@v5
       with:
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_USER: postgres
-        DB_PASSWORD: password
-        DB_NAME: testdb
+        username: postgres
+        password: root
+        databse: userdb
+        port: 5432
 
     - name: Set up Go
       uses: actions/setup-go@v2
