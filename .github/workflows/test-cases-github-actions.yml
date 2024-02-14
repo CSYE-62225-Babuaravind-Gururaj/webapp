@@ -8,40 +8,41 @@ on:
 jobs:
   integration-test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16
-        env:
-    #       # POSTGRES_USER: ${{ secrets.DB_USER }}
-    #       # POSTGRES_PASSWORD: ${{ secrets.DB_PASS }}
-    #       # POSTGRES_DB: ${{ secrets.DB_NAME }}
-    #       # POSTGRES_HOST: ${{ secrets.DB_HOST }}
+    # services:
+    #   postgres:
+    #     image: postgres:16
+    #     env:
+    # #       # POSTGRES_USER: ${{ secrets.DB_USER }}
+    # #       # POSTGRES_PASSWORD: ${{ secrets.DB_PASS }}
+    # #       # POSTGRES_DB: ${{ secrets.DB_NAME }}
+    # #       # POSTGRES_HOST: ${{ secrets.DB_HOST }}
 
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: root
-          POSTGRES_DB: userdb
-          POSTGRES_HOST: localhost
-        ports:
-          - 5432:5432
+    #       POSTGRES_USER: postgres
+    #       POSTGRES_PASSWORD: root
+    #       POSTGRES_DB: userdb
+    #       POSTGRES_HOST: localhost
+    #     ports:
+    #       - 5432:5432
     #     # Optional: Include health checks here
 
     steps:
     - uses: actions/checkout@v2
 
-    # - name: Set up PostgreSQL
-    #   uses: ikalnytskyi/action-setup-postgres@v5
-    #   with:
-    #     DB_HOST: localhost
-    #     DB_PORT: 5432
-    #     DB_USER: postgres
-    #     DB_PASSWORD: password
-    #     DB_NAME: testdb
+    - name: Set up PostgreSQL
+      uses: ikalnytskyi/action-setup-postgres@v5
+      with:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASSWORD: password
+        DB_NAME: testdb
 
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
         go-version: '^1.21.6'
 
+    #Because Git is trying to install some default Go version otherwise
     - name: Cache Go Modules
       uses: actions/cache@v2
       with:
