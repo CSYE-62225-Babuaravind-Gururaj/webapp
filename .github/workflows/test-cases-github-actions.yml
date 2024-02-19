@@ -62,4 +62,4 @@ jobs:
         POSTGRES_DB: ${{ secrets.DB_NAME }}
         POSTGRES_HOST: ${{ secrets.DB_HOST }}
         POSTGRES_PORT: ${{ secrets.DB_PORT }}
-      run: go test -v ./tests;
+      run: go test -v ./tes;
