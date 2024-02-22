@@ -11,8 +11,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v2
         with:
-          go-version: '1.20'
+          go-version: '^1.21.6'
+
+      - name: Packer setup
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: latest
+
+      - name: packer init execution
+        id: init
+        run: "packer init ./packer.pkr.hcl"
+
+      - name: packer validate
+        id: validate
+        run: |
+          if ! packer validate ./packer.pkr.hcl ; then
+            echo "Validation failure"
+            exit 1
+          fi
+
+      - name: packer fmt to check formatting
+        id: fmt
+        run: |
+          if ! packer fmt -check ./packer.pkr.hcl ; then
+            echo "Formatting failure"
+            exit 1
+          fi
       - run: echo "Check successful"

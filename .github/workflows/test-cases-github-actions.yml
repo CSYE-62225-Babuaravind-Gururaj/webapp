@@ -2,11 +2,12 @@ name: Integration Tests
 
 on:
   pull_request:
-    branches:
-      - main
+    types:
+    - closed
 
 jobs:
-  integration-test:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -78,3 +79,26 @@ jobs:
         POSTGRES_HOST: ${{ secrets.DB_HOST }}
         POSTGRES_PORT: ${{ secrets.DB_PORT }}
       run: go test -v ./tests;
+
+# packer tests
+    - name: GCloud auth
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: 'Cloud SDK setup'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: Packer setup
+      uses: hashicorp/setup-packer@main
+      id: setup
+      with:
+        version: latest
+
+    - name: packer init
+      id: init
+      run: "packer init ./webapp.pkr.hcl"
+
+    - name: packer build
+      id: build
+      run: "packer build ./webapp.pkr.hcl"

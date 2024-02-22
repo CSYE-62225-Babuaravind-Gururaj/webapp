@@ -1,0 +1,11 @@
+[Unit]
+Description=Go Web Application
+After=network.target
+
+[Service]
+User=csye6225
+Group=csye6225
+ExecStart=/usr/bin/go run /home/csye6225/webapp/main.go
+
+[Install]
+WantedBy=multi-user.target
