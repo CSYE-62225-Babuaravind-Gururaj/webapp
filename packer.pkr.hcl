@@ -3,7 +3,7 @@ packer {
   required_plugins {
     googlecompute = {
       version = ">= 1.0"
-      source  = "hashicorp/googlecompute"
+      source  = "github.com/hashicorp/googlecompute"
     }
   }
 }
