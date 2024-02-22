@@ -3,7 +3,7 @@ packer {
   required_plugins {
     googlecompute = {
       version = ">= 1.0"
-      source  = "github.com/hashicorp/googlecompute"
+      source  = "hashicorp/googlecompute"
     }
   }
 }
@@ -48,8 +48,8 @@ variable "ssh_username" {
 }
 
 variable golang_version {
-    type = string
-    default =""
+  type    = string
+  default = ""
 }
 
 source "googlecompute" "webapp-source" {
@@ -69,11 +69,11 @@ build {
   // PostgreSQL Installation
   provisioner "shell" {
     inline = [
-    "sudo yum install -y postgresql-server postgresql-contrib",
-    "sudo postgresql-setup --initdb",
-    "sudo systemctl enable postgresql",
-    "sudo systemctl start postgresql",
-    ] 
+      "sudo yum install -y postgresql-server postgresql-contrib",
+      "sudo postgresql-setup --initdb",
+      "sudo systemctl enable postgresql",
+      "sudo systemctl start postgresql",
+    ]
   }
 
   // PostgreSQL user and database creation and assign perms
@@ -103,18 +103,18 @@ build {
 
   provisioner "shell" {
     inline = [
-    // Create group and user
-    "sudo groupadd csye6225",
-    "sudo useradd -g csye6225 -m csye6225",
+      // Create group and user
+      "sudo groupadd csye6225",
+      "sudo useradd -g csye6225 -m csye6225",
 
-    // Move webapp and enable service
-    "sudo mv /tmp/webapp /usr/local/bin",
-    "sudo mv /tmp/webapp.service /etc/systemd/system",
+      // Move webapp and enable service
+      "sudo mv /tmp/webapp /usr/local/bin",
+      "sudo mv /tmp/webapp.service /etc/systemd/system",
 
-    // Enable and start webapp
-    "sudo systemctl daemon-reload",
-    "sudo systemctl enable webapp.service",
-    "sudo systemctl start webapp.service"
+      // Enable and start webapp
+      "sudo systemctl daemon-reload",
+      "sudo systemctl enable webapp.service",
+      "sudo systemctl start webapp.service"
     ]
   }
 
