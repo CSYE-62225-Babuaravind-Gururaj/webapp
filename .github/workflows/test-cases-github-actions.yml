@@ -2,12 +2,20 @@ name: Integration Tests
 
 on:
   pull_request:
-    branches:
-      - main
+    types:
+      - closed
 
 jobs:
-  integration-test:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+
+    env:
+      DBHOST: ${{ secrets.DBHOST }}
+      DBPORT: ${{ secrets.DBPORT }}
+      DBUSER: ${{ secrets.DBUSER }}
+      DBPASS: ${{ secrets.DBPASS }}
+      DBNAME: ${{ secrets.DBNAME }}
 
     steps:
     - uses: actions/checkout@v2
@@ -23,6 +31,24 @@ jobs:
           DBPASS=${{ secrets.DB_PASS }}
           DBNAME=${{ secrets.DB_NAME }}
         write-mode: overwrite
+    
+    # - name: Create config.go file
+    #   run: |
+    #     echo "package config" > config.go
+    #     echo "" >> config.go
+    #     echo "var Config = struct{" >> config.go
+    #     echo "    DBHost string" >> config.go
+    #     echo "    DBPort string" >> config.go
+    #     echo "    DBUser string" >> config.go
+    #     echo "    DBPass string" >> config.go
+    #     echo "    DBName string" >> config.go
+    #     echo "}{" >> config.go
+    #     echo "    DBHost: \"${{ secrets.DB_HOST }}\"," >> config.go
+    #     echo "    DBPort: \"${{ secrets.DB_PORT }}\"," >> config.go
+    #     echo "    DBUser: \"${{ secrets.DB_USER }}\"," >> config.go
+    #     echo "    DBPass: \"${{ secrets.DB_PASS }}\"," >> config.go
+    #     echo "    DBName: \"${{ secrets.DB_NAME }}\"," >> config.go
+    #     echo "}" >> config.go
 
     - name: Set up PostgreSQL
       uses: ikalnytskyi/action-setup-postgres@v5
@@ -78,3 +104,28 @@ jobs:
         POSTGRES_HOST: ${{ secrets.DB_HOST }}
         POSTGRES_PORT: ${{ secrets.DB_PORT }}
       run: go test -v ./tests;
+
+    - name: Build the Go application
+      run:  go build -o webapp .
+
+    - name: GCloud authentication
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: 'GCloud SDK setup'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: Packer setup
+      uses: hashicorp/setup-packer@main
+      id: setup
+      with:
+        version: latest
+
+    - name: Packer init
+      id: init
+      run: "packer init ./packer.pkr.hcl"
+
+    - name: Packer build
+      id: build
+      run: "packer build ./packer.pkr.hcl"
