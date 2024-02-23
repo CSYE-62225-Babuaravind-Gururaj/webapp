@@ -5,11 +5,11 @@ After=network.target
 [Service]
 User=csye6225
 Group=csye6225
-Environment="DBHOST=localhost"
-Environment="DBPORT=5432"
-Environment="DBUSER=babuaravind"
-Environment="DBPASS=root"
-Environment="DBNAME=userdb"
+Environment=DBHOST=localhost
+Environment=DBPORT=5432
+Environment=DBUSER=babuaravind
+Environment=DBPASS=root
+Environment=DBNAME=userdb
 ExecStart=/usr/local/bin/webapp
 
 [Install]

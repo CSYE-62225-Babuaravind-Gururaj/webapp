@@ -24,7 +24,7 @@ variable "source_image_family" {
 
 variable "machine_type" {
   type    = string
-  default = "e2-medium"
+  default = "custom-1-2048"
 }
 
 variable "application_name" {
@@ -69,11 +69,9 @@ build {
   // PostgreSQL Installation
   provisioner "shell" {
     inline = [
+      "sudo yum update -y",
       "sudo yum install -y postgresql-server postgresql-contrib",
-      "sudo postgresql-setup --initdb", #instead use bottom 3?
-      // su - postgres
-      // $ pg_ctl initdb
-      // $ exit
+      "sudo postgresql-setup --initdb --unit postgresql",
       "sudo systemctl enable postgresql",
       "sudo systemctl start postgresql",
     ]
@@ -94,17 +92,10 @@ build {
     destination = "/tmp/webapp.service"
   }
 
-  provisioner "shell" {
-    inline = [
-      "cd /usr/local/bin",
-      "echo 'DBHOST=$DBHOST' >> /usr/local/bin/.env",
-      "echo 'DBPORT=$DBPORT' >> /usr/local/bin/.env",
-      "echo 'DBUSER=$DBUSER' >> /usr/local/bin/.env",
-      "echo 'DBNAME=$DBNAME' >> /usr/local/bin/.env",
-      "echo 'DBPASS=$DBPASS' >> /usr/local/bin/.env",
-    ]
+  provisioner "file" {
+    source      = "./.env"
+    destination = "/tmp/.env"
   }
-
 
   provisioner "shell" {
     inline = [
@@ -114,14 +105,24 @@ build {
 
       // Move webapp and enable service
       "sudo mv /tmp/webapp /usr/local/bin",
+      "sudo mv /tmp/.env /usr/local/bin",
       "sudo mv /tmp/webapp.service /etc/systemd/system",
 
-      // Enable and start webapp
-      "sudo systemctl daemon-reload",
-      "sudo systemctl enable webapp.service",
-      "sudo systemctl start webapp.service",
+      "sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config",
+      "sudo restorecon -rv /usr/local/bin/webapp",
+
+      "sudo chown csye6225:csye6225 /usr/local/bin/webapp",
+      "sudo chown csye6225:csye6225 /usr/local/bin/.env",
+      "sudo chmod 755 /usr/local/bin/webapp",
+      "sudo chmod 755 /usr/local/bin/.env",
+
+      //set nologin to webapp user
       "sudo usermod csye6225 --shell /usr/sbin/nologin",
     ]
   }
 
+  // Enable and start webapp
+      provisioner "shell" {
+        script = "./db.sh"
+      }
 }
