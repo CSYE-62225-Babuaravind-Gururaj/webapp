@@ -103,7 +103,7 @@ build {
       "echo 'DBNAME=$DBNAME' >> /usr/local/bin/.env",
       "echo 'DBPASS=$DBPASS' >> /usr/local/bin/.env",
     ]
-    }
+  }
 
 
   provisioner "shell" {
