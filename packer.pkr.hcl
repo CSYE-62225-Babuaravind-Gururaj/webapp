@@ -92,10 +92,23 @@ build {
     destination = "/tmp/webapp.service"
   }
 
-  // provisioner "file" {
-  //   source      = "./.env"
-  //   destination = "/tmp/.env"
-  // }
+  provisioner "file" {
+    content = templatefile("./webapp.service.tmpl", {
+      DBHOST = env("DBHOST"),
+      DBPORT = env("DBPORT"),
+      DBUSER = env("DBUSER"),
+      DBPASS = env("DBPASS"),
+      DBNAME = env("DBNAME")
+    })
+    destination = "/tmp/webapp.service"
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sudo mv /tmp/webapp.service /etc/systemd/system/webapp.service",
+    ]
+  }
+
 
   provisioner "shell" {
     inline = [

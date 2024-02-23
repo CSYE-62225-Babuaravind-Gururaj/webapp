@@ -1,0 +1,16 @@
+[Unit]
+Description=Go Web Application
+After=network.target
+
+[Service]
+User=csye6225
+Group=csye6225
+Environment=DBHOST=${dbhost}
+Environment=DBPORT=${dbport}
+Environment=DBUSER=${dbuser}
+Environment=DBPASS=${dbpass}
+Environment=DBNAME=${dbname}
+ExecStart=/usr/local/bin/webapp
+
+[Install]
+WantedBy=multi-user.target
