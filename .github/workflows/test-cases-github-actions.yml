@@ -31,24 +31,6 @@ jobs:
           DBPASS=${{ secrets.DB_PASS }}
           DBNAME=${{ secrets.DB_NAME }}
         write-mode: overwrite
-    
-    - name: Create config.go file
-      run: |
-        echo "package config" > config.go
-        echo "" >> config.go
-        echo "var Config = struct{" >> config.go
-        echo "    DBHost string" >> config.go
-        echo "    DBPort string" >> config.go
-        echo "    DBUser string" >> config.go
-        echo "    DBPass string" >> config.go
-        echo "    DBName string" >> config.go
-        echo "}{" >> config.go
-        echo "    DBHost: \"${{ secrets.DB_HOST }}\"," >> config.go
-        echo "    DBPort: \"${{ secrets.DB_PORT }}\"," >> config.go
-        echo "    DBUser: \"${{ secrets.DB_USER }}\"," >> config.go
-        echo "    DBPass: \"${{ secrets.DB_PASS }}\"," >> config.go
-        echo "    DBName: \"${{ secrets.DB_NAME }}\"," >> config.go
-        echo "}" >> config.go
 
     - name: Set up PostgreSQL
       uses: ikalnytskyi/action-setup-postgres@v5
