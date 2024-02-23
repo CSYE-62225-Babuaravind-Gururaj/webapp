@@ -123,6 +123,6 @@ build {
 
   // Enable and start webapp
   provisioner "shell" {
-    script = "./db.sh"
+    script = "./webapp_start.sh"
   }
 }
