@@ -70,7 +70,10 @@ build {
   provisioner "shell" {
     inline = [
       "sudo yum install -y postgresql-server postgresql-contrib",
-      "sudo postgresql-setup --initdb",
+      "sudo postgresql-setup --initdb", #instead use bottom 3?
+      // su - postgres
+      // $ pg_ctl initdb
+      // $ exit
       "sudo systemctl enable postgresql",
       "sudo systemctl start postgresql",
     ]
@@ -91,15 +94,17 @@ build {
     destination = "/tmp/webapp.service"
   }
 
-  // provisioner "shell" {
-  //   inline= [
-  //   "echo 'DBHOST=localhost' >> /etc/environment",
-  //   "echo 'DBPORT=5432' >> /etc/environment",
-  //   "echo 'DBUSER=csye6225' >> /etc/environment",
-  //   "echo 'DBNAME=userdb' >> /etc/environment",
-  //   "echo 'DBPASS=root' >> /etc/environment",
-  //   ]
-  // }
+  provisioner "shell" {
+    inline = [
+      "cd /usr/local/bin",
+      "echo 'DBHOST=$DBHOST' >> /usr/local/bin/.env",
+      "echo 'DBPORT=$DBPORT' >> /usr/local/bin/.env",
+      "echo 'DBUSER=$DBUSER' >> /usr/local/bin/.env",
+      "echo 'DBNAME=$DBNAME' >> /usr/local/bin/.env",
+      "echo 'DBPASS=$DBPASS' >> /usr/local/bin/.env",
+    ]
+    }
+
 
   provisioner "shell" {
     inline = [
@@ -114,7 +119,8 @@ build {
       // Enable and start webapp
       "sudo systemctl daemon-reload",
       "sudo systemctl enable webapp.service",
-      "sudo systemctl start webapp.service"
+      "sudo systemctl start webapp.service",
+      "sudo usermod csye6225 --shell /usr/sbin/nologin",
     ]
   }
 
