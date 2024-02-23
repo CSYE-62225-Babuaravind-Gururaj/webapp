@@ -104,4 +104,4 @@ jobs:
         DBUSER: ${{ secrets.DBUSER }}
         DBPASS: ${{ secrets.DBPASS }}
         DBNAME: ${{ secrets.DBNAME }}
-      run: packer build template.pkr.hcl
+      run: packer build packer.pkr.hcl
