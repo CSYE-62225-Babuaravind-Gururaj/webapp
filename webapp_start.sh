@@ -2,6 +2,6 @@
 
 sudo systemctl daemon-reload
 
-sudo systemctl start application.service
+sudo systemctl start webapp.service
 
-sudo systemctl enable application.service
+sudo systemctl enable webapp.service
