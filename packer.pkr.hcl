@@ -92,10 +92,10 @@ build {
     destination = "/tmp/webapp.service"
   }
 
-  provisioner "file" {
-    source      = "./.env"
-    destination = "/tmp/.env"
-  }
+  // provisioner "file" {
+  //   source      = "./.env"
+  //   destination = "/tmp/.env"
+  // }
 
   provisioner "shell" {
     inline = [
@@ -105,16 +105,16 @@ build {
 
       // Move webapp and enable service
       "sudo mv /tmp/webapp /usr/local/bin",
-      "sudo mv /tmp/.env /usr/local/bin",
+      // "sudo mv /tmp/.env /usr/local/bin",
       "sudo mv /tmp/webapp.service /etc/systemd/system",
 
       "sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config",
       "sudo restorecon -rv /usr/local/bin/webapp",
 
       "sudo chown csye6225:csye6225 /usr/local/bin/webapp",
-      "sudo chown csye6225:csye6225 /usr/local/bin/.env",
+      // "sudo chown csye6225:csye6225 /usr/local/bin/.env",
       "sudo chmod 755 /usr/local/bin/webapp",
-      "sudo chmod 755 /usr/local/bin/.env",
+      // "sudo chmod 755 /usr/local/bin/.env",
 
       //set nologin to webapp user
       "sudo usermod csye6225 --shell /usr/sbin/nologin",
@@ -122,7 +122,7 @@ build {
   }
 
   // Enable and start webapp
-      provisioner "shell" {
-        script = "./db.sh"
-      }
+  provisioner "shell" {
+    script = "./db.sh"
+  }
 }
