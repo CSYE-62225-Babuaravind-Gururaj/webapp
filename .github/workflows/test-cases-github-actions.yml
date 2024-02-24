@@ -108,6 +108,7 @@ jobs:
           After=network.target
 
           [Service]
+          ExecStartPre=/bin/sleep 10
           User=csye6225
           Group=csye6225
           Environment=DBHOST=${{ secrets.DB_HOST }}
