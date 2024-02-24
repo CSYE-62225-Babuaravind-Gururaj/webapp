@@ -130,7 +130,7 @@ jobs:
           #!/bin/sh
           sudo sed -i 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
           sudo su - postgres <<EOF
-          psql -c "CREATE USER ${{ secrets.DB_USER }} WITH PASSWORD 'root';"
+          psql -c "CREATE USER ${{ secrets.DB_USER }} WITH PASSWORD ${{ secrets.DB_PASS }};"
           psql -c "CREATE DATABASE ${{ secrets.DB_NAME }};"
           psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.DB_NAME }} TO ${{ secrets.DB_USER }};"
           psql -c "ALTER USER ${{ secrets.DB_USER }} WITH SUPERUSER;"
