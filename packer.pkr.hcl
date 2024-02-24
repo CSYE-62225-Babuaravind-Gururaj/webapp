@@ -12,7 +12,7 @@ locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
 
-variable "gcp_project_id" {
+variable "gcp_project_id"   {
   type    = string
   default = "csye-6225-terraform-packer"
 }
