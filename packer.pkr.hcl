@@ -12,7 +12,7 @@ locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
 
-variable "gcp_project_id"   {
+variable "gcp_project_id" {
   type    = string
   default = "csye-6225-terraform-packer"
 }
@@ -55,7 +55,7 @@ variable golang_version {
 source "googlecompute" "webapp-source" {
   image_name          = "webapp-${local.timestamp}"
   project_id          = var.gcp_project_id
-  machine_type        = var.machine_type
+  machine_type        = var.machine_typ
   source_image_family = var.source_image_family
   ssh_username        = var.ssh_username
   zone                = var.zone
