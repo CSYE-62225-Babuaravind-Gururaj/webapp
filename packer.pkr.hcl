@@ -111,7 +111,7 @@ build {
       "sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config",
       "sudo restorecon -rv /usr/local/bin/webapp",
 
-      "sudo touch /home/csye6225/webapp/userdata.sh",
+      // "sudo touch /home/csye6225/webapp/userdata.sh",
       "sudo chown csye6225:csye6225 /usr/local/bin/webapp",
       // "sudo chown csye6225:csye6225 /usr/local/bin/.env",
       "sudo chmod 750 /usr/local/bin/webapp",
