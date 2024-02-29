@@ -97,44 +97,44 @@ jobs:
       id: init
       run: "packer init ./packer.pkr.hcl"
 
-    - name: set webapp Variables
-      uses: DamianReeves/write-file-action@master
-      with:
-        path: './webapp.service'
-        write-mode: overwrite
-        contents: |
-          [Unit]
-          Description=Go Web Application
-          After=network.target
+    # - name: set webapp Variables
+    #   uses: DamianReeves/write-file-action@master
+    #   with:
+    #     path: './webapp.service'
+    #     write-mode: overwrite
+    #     contents: |
+    #       [Unit]
+    #       Description=Go Web Application
+    #       After=network.target
 
-          [Service]
-          ExecStartPre=/bin/sleep 10
-          User=csye6225
-          Group=csye6225
-          Environment=DBHOST=${{ secrets.DB_HOST }}
-          Environment=DBPORT=${{ secrets.DB_PORT }}
-          Environment=DBUSER=${{ secrets.DB_USER }}
-          Environment=DBPASS=${{ secrets.DB_PASS }}
-          Environment=DBNAME=${{ secrets.DB_NAME }}
-          ExecStart=/usr/local/bin/webapp
+    #       [Service]
+    #       ExecStartPre=/bin/sleep 10
+    #       User=csye6225
+    #       Group=csye6225
+    #       Environment=DBHOST=${{ secrets.DB_HOST }}
+    #       Environment=DBPORT=${{ secrets.DB_PORT }}
+    #       Environment=DBUSER=${{ secrets.DB_USER }}
+    #       Environment=DBPASS=${{ secrets.DB_PASS }}
+    #       Environment=DBNAME=${{ secrets.DB_NAME }}
+    #       ExecStart=/usr/local/bin/webapp
 
-          [Install]
-          WantedBy=multi-user.target
+    #       [Install]
+    #       WantedBy=multi-user.target
 
-    - name: set webapp Variables
-      uses: DamianReeves/write-file-action@master
-      with:
-        path: './db.sh'
-        write-mode: overwrite
-        contents: |
-          #!/bin/sh
-          sudo sed -i 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
-          sudo su - postgres <<EOF
-          psql -c "CREATE USER ${{ secrets.DB_USER }} WITH PASSWORD 'root';"
-          psql -c "CREATE DATABASE ${{ secrets.DB_NAME }};"
-          psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.DB_NAME }} TO ${{ secrets.DB_USER }};"
-          psql -c "ALTER USER ${{ secrets.DB_USER }} WITH SUPERUSER;"
-          EOF
+    # - name: set webapp Variables
+    #   uses: DamianReeves/write-file-action@master
+    #   with:
+    #     path: './db.sh'
+    #     write-mode: overwrite
+    #     contents: |
+    #       #!/bin/sh
+    #       sudo sed -i 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
+    #       sudo su - postgres <<EOF
+    #       psql -c "CREATE USER ${{ secrets.DB_USER }} WITH PASSWORD 'root';"
+    #       psql -c "CREATE DATABASE ${{ secrets.DB_NAME }};"
+    #       psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.DB_NAME }} TO ${{ secrets.DB_USER }};"
+    #       psql -c "ALTER USER ${{ secrets.DB_USER }} WITH SUPERUSER;"
+    #       EOF
 
     - name: Run Packer
       env:

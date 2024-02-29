@@ -67,20 +67,20 @@ build {
   ]
 
   // PostgreSQL Installation
-  provisioner "shell" {
-    inline = [
-      "sudo yum update -y",
-      "sudo yum install -y postgresql-server postgresql-contrib",
-      "sudo postgresql-setup --initdb --unit postgresql",
-      "sudo systemctl enable postgresql",
-      "sudo systemctl start postgresql",
-    ]
-  }
+  // provisioner "shell" {
+  //   inline = [
+  //     "sudo yum update -y",
+  //     "sudo yum install -y postgresql-server postgresql-contrib",
+  //     "sudo postgresql-setup --initdb --unit postgresql",
+  //     "sudo systemctl enable postgresql",
+  //     "sudo systemctl start postgresql",
+  //   ]
+  // }
 
   // PostgreSQL user and database creation and assign perms
-  provisioner "shell" {
-    script = "./db.sh"
-  }
+  // provisioner "shell" {
+  //   script = "./db.sh"
+  // }
 
   provisioner "file" {
     source      = "./webapp"
@@ -111,13 +111,15 @@ build {
       "sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config",
       "sudo restorecon -rv /usr/local/bin/webapp",
 
+      "sudo touch /home/csye6225/webapp/userdata.tpl",
       "sudo chown csye6225:csye6225 /usr/local/bin/webapp",
       // "sudo chown csye6225:csye6225 /usr/local/bin/.env",
-      "sudo chmod 755 /usr/local/bin/webapp",
+      "sudo chmod 750 /usr/local/bin/webapp",
       // "sudo chmod 755 /usr/local/bin/.env",
 
       //set nologin to webapp user
       "sudo usermod csye6225 --shell /usr/sbin/nologin",
+      "cd"
     ]
   }
 
