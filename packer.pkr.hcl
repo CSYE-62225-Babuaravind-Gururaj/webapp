@@ -100,8 +100,9 @@ build {
   provisioner "shell" {
     inline = [
       // Create group and user
-      "sudo groupadd csye6225",
-      "sudo useradd -g csye6225 -m csye6225",
+      "getent group csye6225 || sudo groupadd csye6225",
+      // Check if user exists, create if it does not
+      "id -u csye6225 || sudo useradd -g csye6225 -m csye6225",
 
       // Move webapp and enable service
       "sudo mv /tmp/webapp /usr/local/bin",
