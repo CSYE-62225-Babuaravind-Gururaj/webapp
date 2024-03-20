@@ -11,14 +11,20 @@ import (
 )
 
 func CreateLogger() *zap.Logger {
-	logFilePath := os.TempDir() + "/myapp/app.log"
+	logDirPath := "./myapp"
+	logFilePath := logDirPath + "/app.log"
+
+	if _, err := os.Stat(logDirPath); os.IsNotExist(err) {
+		// Attempt to create the directory if it doesn't exist
+		if mkErr := os.MkdirAll(logDirPath, 0755); mkErr != nil {
+			log.Printf("Error creating log directory: %v\n", mkErr)
+			return nil
+		}
+	}
 
 	_, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
-		// Instead of fmt.Println, use standard logging to ensure it's captured by journalctl/systemctl.
-		// For services managed by systemd, stdout and stderr are captured by journald.
 		log.Printf("Error creating/opening log file: %v\n", err)
-		// Consider how you want to handle this error. Options might include returning a nil logger, exiting, or falling back to console logging.
 		return nil
 	}
 
