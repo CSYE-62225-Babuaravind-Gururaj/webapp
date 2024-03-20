@@ -39,7 +39,7 @@ variable "service_name" {
 
 variable "zone" {
   type    = string
-  default = "us-central1-b"
+  default = "us-central1-a"
 }
 
 variable "ssh_username" {
