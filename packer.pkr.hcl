@@ -118,6 +118,7 @@ build {
       // "sudo chmod 755 /usr/local/bin/.env",
 
       "sudo mkdir -p /var/log/myapp",
+      "sudo touch /var/log/myapp/app.log",
       "sudo chown -R csye6225:csye6225 /var/log/myapp",
 
       //set nologin to webapp user

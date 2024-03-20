@@ -13,10 +13,10 @@ import (
 
 func main() {
 
+	logger := logs.CreateLogger()
+
 	config.LoadEnv()
 	database.InitDB()
-
-	logger := logs.CreateLogger()
 
 	defer logger.Sync() //flush the logger
 
