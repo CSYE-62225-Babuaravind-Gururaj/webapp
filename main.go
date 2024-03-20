@@ -3,6 +3,7 @@ package main
 import (
 	"cloud-proj/health-check/config"
 	"cloud-proj/health-check/database"
+	"cloud-proj/health-check/logs"
 	"cloud-proj/health-check/routes"
 
 	"cloud-proj/health-check/middleware"
@@ -14,6 +15,12 @@ func main() {
 
 	config.LoadEnv()
 	database.InitDB()
+
+	logger := logs.CreateLogger()
+
+	defer logger.Sync() //flush the logger
+
+	logger.Info("Hello from Zap!")
 
 	router := gin.Default()
 	router.Use(middleware.CheckMethodAndPath)

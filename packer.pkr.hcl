@@ -82,6 +82,37 @@ build {
   //   script = "./db.sh"
   // }
 
+  // provisioner "file" {
+  //   source      = "./.env"
+  //   destination = "/tmp/.env"
+  // }
+
+  // Cloud Ops Agent installation
+  provisioner "shell" {
+    inline = [
+      "curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh",
+      "sudo bash add-google-cloud-ops-agent-repo.sh --also-install",
+      "sudo mkdir -p /var/log/myapp",
+      "sudo chown -R csye6225:csye6225 /var/log/myapp"
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "echo 'logging:' > /etc/google-cloud-ops-agent/config.yaml",
+      "echo '  receivers:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '    myapp_receiver:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '      type: files' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '      include_paths:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '        - /var/log/myapp/app.log' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '  service:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '    pipelines:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '      logs:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo '        receivers: [myapp_receiver]' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo systemctl restart google-cloud-ops-agent.service"
+    ]
+  }
+
   provisioner "file" {
     source      = "./webapp"
     destination = "/tmp/webapp"
@@ -91,11 +122,6 @@ build {
     source      = "./webapp.service"
     destination = "/tmp/webapp.service"
   }
-
-  // provisioner "file" {
-  //   source      = "./.env"
-  //   destination = "/tmp/.env"
-  // }
 
   provisioner "shell" {
     inline = [

@@ -2,17 +2,26 @@ package routes
 
 import (
 	"cloud-proj/health-check/database"
+	"cloud-proj/health-check/logs"
 	"cloud-proj/health-check/models"
 	"cloud-proj/health-check/utils"
 	"log"
+	"log/slog"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap/exp/zapslog"
 	"gorm.io/gorm"
 )
 
 func CreateUserRoute(c *gin.Context) {
+	logger := logs.CreateLogger()
+
+	defer logger.Sync()
+
+	sl := slog.New(zapslog.NewHandler(logger.Core(), nil))
+
 	var jsonMap map[string]interface{}
 
 	if err := c.ShouldBindJSON(&jsonMap); err != nil {
@@ -102,4 +111,10 @@ func CreateUserRoute(c *gin.Context) {
 		"account_updated": user.AccountUpdated,
 	})
 
+	sl.Info(
+		"incoming request",
+		slog.String("method", "POST"),
+		slog.String("path", "/v1/user"),
+		slog.Int("status", 201),
+	)
 }
