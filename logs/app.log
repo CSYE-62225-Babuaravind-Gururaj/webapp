@@ -48,3 +48,6 @@
 {"level":"error","timestamp":"2024-03-19T21:10:19.522-0400","msg":"Password authentication failed","method":"GET","path":"/v1/user/self","status":401}
 {"level":"error","timestamp":"2024-03-19T21:10:38.488-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":401}
 {"level":"info","timestamp":"2024-03-19T21:10:52.053-0400","msg":"incoming request","method":"PUT","path":"/v1/user/self","status":204}
+{"level":"info","timestamp":"2024-03-20T02:53:28.481-0400","msg":"Hello from Zap!"}
+{"level":"error","timestamp":"2024-03-20T02:54:11.662-0400","msg":"Password authentication failed","method":"GET","path":"/v1/user/self","status":401}
+{"level":"error","timestamp":"2024-03-20T02:54:14.780-0400","msg":"Password authentication failed","method":"GET","path":"/v1/user/self","status":401}
