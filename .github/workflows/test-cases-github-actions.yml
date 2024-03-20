@@ -74,6 +74,7 @@ jobs:
         POSTGRES_DB: ${{ secrets.DB_NAME }}
         POSTGRES_HOST: ${{ secrets.DB_HOST }}
         POSTGRES_PORT: ${{ secrets.DB_PORT }}
+        RUN_ENV: test 
       run: go test -v ./tests;
 
     - name: Build the Go application
