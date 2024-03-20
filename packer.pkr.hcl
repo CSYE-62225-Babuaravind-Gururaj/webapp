@@ -136,16 +136,16 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo echo 'logging:' > /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '  receivers:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '    myapp_receiver:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '      type: files' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '      include_paths:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '        - /var/log/myapp/app.log' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '  service:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '    pipelines:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '      logs:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "sudo echo '        receivers: [myapp_receiver]' >> /etc/google-cloud-ops-agent/config.yaml",
+      "echo 'logging:' | sudo tee /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '  receivers:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '    myapp_receiver:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '      type: files' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '      include_paths:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '        - /var/log/myapp/app.log' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '  service:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '    pipelines:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '      logs:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "echo '        receivers: [myapp_receiver]' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
       "sudo systemctl restart google-cloud-ops-agent.service"
     ]
   }
