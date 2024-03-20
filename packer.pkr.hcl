@@ -136,16 +136,16 @@ build {
 
   provisioner "shell" {
     inline = [
-      "echo 'logging:' > /etc/google-cloud-ops-agent/config.yaml",
-      "echo '  receivers:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '    myapp_receiver:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '      type: files' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '      include_paths:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '        - /var/log/myapp/app.log' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '  service:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '    pipelines:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '      logs:' >> /etc/google-cloud-ops-agent/config.yaml",
-      "echo '        receivers: [myapp_receiver]' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo 'logging:' > /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '  receivers:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '    myapp_receiver:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '      type: files' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '      include_paths:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '        - /var/log/myapp/app.log' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '  service:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '    pipelines:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '      logs:' >> /etc/google-cloud-ops-agent/config.yaml",
+      "sudo echo '        receivers: [myapp_receiver]' >> /etc/google-cloud-ops-agent/config.yaml",
       "sudo systemctl restart google-cloud-ops-agent.service"
     ]
   }
