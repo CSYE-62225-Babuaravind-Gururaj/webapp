@@ -12,6 +12,8 @@ import (
 
 func CreateLogger() *zap.Logger {
 
+	log.SetOutput(os.Stdout)
+
 	if os.Getenv("RUN_ENV") == "test" {
 		// Configure logger for test environment: log to stdout only.
 		encoderConfig := zap.NewDevelopmentEncoderConfig()
@@ -22,6 +24,8 @@ func CreateLogger() *zap.Logger {
 
 	logDirPath := "/var/log/myapp"
 	logFilePath := logDirPath + "/app.log"
+
+	log.Printf("Creating logger")
 
 	_, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
