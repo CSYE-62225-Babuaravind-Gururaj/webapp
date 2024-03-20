@@ -82,6 +82,16 @@ build {
   //   script = "./db.sh"
   // }
 
+  provisioner "file" {
+    source      = "./webapp"
+    destination = "/tmp/webapp"
+  }
+
+  provisioner "file" {
+    source      = "./webapp.service"
+    destination = "/tmp/webapp.service"
+  }
+
   // provisioner "file" {
   //   source      = "./.env"
   //   destination = "/tmp/.env"
@@ -138,16 +148,6 @@ build {
       "echo '        receivers: [myapp_receiver]' >> /etc/google-cloud-ops-agent/config.yaml",
       "sudo systemctl restart google-cloud-ops-agent.service"
     ]
-  }
-
-  provisioner "file" {
-    source      = "./webapp"
-    destination = "/tmp/webapp"
-  }
-
-  provisioner "file" {
-    source      = "./webapp.service"
-    destination = "/tmp/webapp.service"
   }
 
   // Enable and start webapp
