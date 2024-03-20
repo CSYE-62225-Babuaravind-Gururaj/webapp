@@ -88,6 +88,11 @@ build {
   }
 
   provisioner "file" {
+    source      = "./webapp.zip"
+    destination = "/tmp/webapp.zip"
+  }
+
+  provisioner "file" {
     source      = "./webapp.service"
     destination = "/tmp/webapp.service"
   }
@@ -105,6 +110,7 @@ build {
 
       // Move webapp and enable service
       "sudo mv /tmp/webapp /usr/local/bin",
+      "sudo mv /tmp/webapp.zip /usr/local/bin",
       // "sudo mv /tmp/.env /usr/local/bin",
       "sudo mv /tmp/webapp.service /etc/systemd/system",
 
