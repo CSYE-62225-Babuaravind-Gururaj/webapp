@@ -11,7 +11,7 @@ import (
 )
 
 func CreateLogger() *zap.Logger {
-	logFilePath := "/var/log/myapp/app.log"
+	logFilePath := os.TempDir() + "/myapp/app.log"
 
 	_, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
