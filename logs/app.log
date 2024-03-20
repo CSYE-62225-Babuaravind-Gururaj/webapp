@@ -1,0 +1,50 @@
+{"level":"info","timestamp":"2024-03-19T15:24:00.259-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T17:41:56.651-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T17:59:05.671-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T17:59:17.922-0400","msg":"incoming request","method":"GET","path":"/api/user","status":200}
+{"level":"info","timestamp":"2024-03-19T18:00:22.803-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:00:50.371-0400","msg":"incoming request","method":"GET","path":"/api/user","status":200}
+{"level":"info","timestamp":"2024-03-19T18:01:52.774-0400","msg":"incoming request","method":"GET","path":"/api/user","status":200}
+{"level":"info","timestamp":"2024-03-19T18:31:06.348-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:31:32.778-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:35:19.245-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:37:55.482-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:38:04.968-0400","msg":"incoming request","method":"GET","path":"/api/user","status":200}
+{"level":"info","timestamp":"2024-03-19T18:39:15.577-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:39:26.514-0400","msg":"incoming request","method":"GET","path":"/healthz","status":200}
+{"level":"info","timestamp":"2024-03-19T18:40:06.994-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:45:02.147-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:45:38.524-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:51:41.793-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T18:56:07.657-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T19:34:53.083-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:04:40.775-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:08:07.466-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:08:59.464-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:10:07.210-0400","msg":"incoming request","method":"GET","path":"/v1/user/self","status":200}
+{"level":"info","timestamp":"2024-03-19T20:10:54.397-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:11:42.774-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:14:19.300-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:15:07.537-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:15:44.391-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:27:32.429-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:27:42.198-0400","msg":"incoming request","method":"GET","path":"/v1/user/self","status":200}
+{"level":"info","timestamp":"2024-03-19T20:31:42.908-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:32:27.613-0400","msg":"incoming request","method":"PUT","path":"/v1/user/self","status":204}
+{"level":"info","timestamp":"2024-03-19T20:34:49.805-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T20:35:10.169-0400","msg":"incoming request","method":"GET","path":"/healthz","status":200}
+{"level":"info","timestamp":"2024-03-19T20:49:46.868-0400","msg":"Hello from Zap!"}
+{"level":"error","timestamp":"2024-03-19T20:50:16.842-0400","msg":"Authentication failed2","username":"jane.doe32@example.com"}
+{"level":"info","timestamp":"2024-03-19T20:57:51.768-0400","msg":"Hello from Zap!"}
+{"level":"error","timestamp":"2024-03-19T20:57:57.320-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":200}
+{"level":"info","timestamp":"2024-03-19T21:06:22.960-0400","msg":"Hello from Zap!"}
+{"level":"info","timestamp":"2024-03-19T21:07:35.266-0400","msg":"Hello from Zap!"}
+{"level":"error","timestamp":"2024-03-19T21:08:06.360-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":401}
+{"level":"error","timestamp":"2024-03-19T21:08:57.642-0400","msg":"Authorization header is required","method":"PUT","path":"/v1/user/self","header":"","status":401}
+{"level":"error","timestamp":"2024-03-19T21:09:36.795-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":401}
+{"level":"error","timestamp":"2024-03-19T21:09:40.232-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":401}
+{"level":"error","timestamp":"2024-03-19T21:09:53.697-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":401}
+{"level":"info","timestamp":"2024-03-19T21:10:06.722-0400","msg":"incoming request","method":"GET","path":"/v1/user/self","status":200}
+{"level":"error","timestamp":"2024-03-19T21:10:19.522-0400","msg":"Password authentication failed","method":"GET","path":"/v1/user/self","status":401}
+{"level":"error","timestamp":"2024-03-19T21:10:38.488-0400","msg":"Password authentication failed","method":"PUT","path":"/v1/user/self","status":401}
+{"level":"info","timestamp":"2024-03-19T21:10:52.053-0400","msg":"incoming request","method":"PUT","path":"/v1/user/self","status":204}
