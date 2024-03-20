@@ -11,16 +11,17 @@ import (
 )
 
 func CreateLogger() *zap.Logger {
+
+	if os.Getenv("RUN_ENV") == "test" {
+		// Configure logger for test environment: log to stdout only.
+		encoderConfig := zap.NewDevelopmentEncoderConfig()
+		consoleEncoder := zapcore.NewConsoleEncoder(encoderConfig)
+		core := zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), zap.NewAtomicLevelAt(zap.InfoLevel))
+		return zap.New(core)
+	}
+
 	logDirPath := "/var/log/myapp"
 	logFilePath := logDirPath + "/app.log"
-
-	if _, err := os.Stat(logDirPath); os.IsNotExist(err) {
-		// Attempt to create the directory if it doesn't exist
-		if mkErr := os.MkdirAll(logDirPath, 0755); mkErr != nil {
-			log.Printf("Error creating log directory: %v\n", mkErr)
-			return nil
-		}
-	}
 
 	_, err := os.OpenFile(logFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
