@@ -11,7 +11,7 @@ import (
 )
 
 func CreateLogger() *zap.Logger {
-	logDirPath := "./myapp"
+	logDirPath := "/var/log/myapp"
 	logFilePath := logDirPath + "/app.log"
 
 	if _, err := os.Stat(logDirPath); os.IsNotExist(err) {
