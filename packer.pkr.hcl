@@ -126,8 +126,8 @@ build {
 
       "sudo mkdir -p /var/log/myapp",
       "sudo touch /var/log/myapp/app.log",
-      "sudo chown -R csye6225:csye6225 /var/log/myapp",
-      "sudo chmod 750 /var/log/myapp",
+      "sudo chown csye6225:csye6225 /var/log/myapp/app.log",
+      "sudo chmod 764 /var/log/myapp/app.log"
 
       //set nologin to webapp user
       "sudo usermod csye6225 --shell /usr/sbin/nologin",
