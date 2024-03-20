@@ -127,7 +127,7 @@ build {
       "sudo mkdir -p /var/log/myapp",
       "sudo touch /var/log/myapp/app.log",
       "sudo chown csye6225:csye6225 /var/log/myapp/app.log",
-      "sudo chmod 764 /var/log/myapp/app.log",
+      "sudo chmod 766 /var/log/myapp/app.log",
 
       //set nologin to webapp user
       "sudo usermod csye6225 --shell /usr/sbin/nologin",
@@ -155,6 +155,7 @@ build {
       "echo '    pipelines:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
       "echo '      logs:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
       "echo '        receivers: [myapp_receiver]' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "sudo systemctl enable google-cloud-ops-agent",
       "sudo systemctl restart google-cloud-ops-agent.service"
     ]
   }
