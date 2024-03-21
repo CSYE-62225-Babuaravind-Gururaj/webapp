@@ -83,10 +83,10 @@ build {
   // }
 
   provisioner "file" {
-    source      = "./build/webapp"
+    source      = "./webapp"
     destination = "/tmp/webapp"
   }
-  
+
   provisioner "file" {
     source      = "./webapp.zip"
     destination = "/tmp/webapp.zip"
