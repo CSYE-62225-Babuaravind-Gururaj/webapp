@@ -11,6 +11,8 @@ Environment=DBUSER=
 Environment=DBPASS=
 Environment=DBNAME=
 ExecStart=/usr/local/bin/webapp
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
