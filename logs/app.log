@@ -1,2 +1,35 @@
 {"severity":"error","method":"GET","path":"/v1/user/self","status":401,"time":"2024-03-21T14:39:54-04:00","message":"Password authentication failed"}
 {"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T14:39:57-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:37-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:38-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:39-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:39-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:40-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":6,"time":"2024-03-21T17:46:41-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:41-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":7,"time":"2024-03-21T17:46:55-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:55-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":8,"time":"2024-03-21T17:46:55-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:55-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":9,"time":"2024-03-21T17:46:56-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:56-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":10,"time":"2024-03-21T17:46:56-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:56-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":11,"time":"2024-03-21T17:46:57-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T17:46:57-04:00","message":"Health check successful"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-21T17:49:05-04:00","message":"User created successfully"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-21T17:51:42-04:00","message":"User creation failed"}
+{"severity":"debug","action":"Creating user in database","username":"jane.doe21@example.com","time":"2024-03-21T17:59:05-04:00","message":"Attempting to create user"}
+{"severity":"debug","action":"User created in database","username":"jane.doe21@example.com","time":"2024-03-21T17:59:05-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-21T17:59:05-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"jane.doe20@example.com","time":"2024-03-21T17:59:49-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-21T17:59:49-04:00","message":"User created successfully"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:48:33-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:48:58-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:48:58-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:48:59-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:49:00-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":6,"time":"2024-03-21T18:49:00-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:49:00-04:00","message":"Health check successful"}
+{"severity":"warn","method":"GET","path":"/healthz","hitCount":7,"time":"2024-03-21T18:49:01-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:49:01-04:00","message":"Health check successful"}
