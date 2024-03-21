@@ -19,8 +19,7 @@ jobs:
         run: go get .
       - name: Build
         run: |
-            mkdir -p build
-            go build -v -o ./build/webapp ./...
+            go build -v -o webapp
       - name: Test with the Go CLI
         run: go test
 
