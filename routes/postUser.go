@@ -5,22 +5,14 @@ import (
 	"cloud-proj/health-check/logs"
 	"cloud-proj/health-check/models"
 	"cloud-proj/health-check/utils"
-	"log"
-	"log/slog"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap/exp/zapslog"
-	"gorm.io/gorm"
 )
 
 func CreateUserRoute(c *gin.Context) {
 	logger := logs.CreateLogger()
-
-	defer logger.Sync()
-
-	sl := slog.New(zapslog.NewHandler(logger.Core(), nil))
 
 	var jsonMap map[string]interface{}
 
@@ -45,7 +37,7 @@ func CreateUserRoute(c *gin.Context) {
 		Username  string `json:"username"`
 	}
 
-	//Manually testing the fields as GORM does not provide internal JSON field check
+	// Manually testing the fields as GORM does not provide internal JSON field check
 	input.FirstName, _ = jsonMap["first_name"].(string)
 	input.LastName, _ = jsonMap["last_name"].(string)
 	input.Password, _ = jsonMap["password"].(string)
@@ -54,7 +46,7 @@ func CreateUserRoute(c *gin.Context) {
 	hashedPassword, err := utils.HashPassword(input.Password)
 
 	if err != nil {
-		log.Printf("Error hashing password: %v", err)
+		logger.Error().Err(err).Msg("Error hashing password")
 		c.JSON(http.StatusForbidden, gin.H{"error": "Error hashing password"})
 		return
 	}
@@ -90,15 +82,8 @@ func CreateUserRoute(c *gin.Context) {
 
 	result := database.DB.Create(&user)
 	if result.Error != nil {
-		if result.Error == gorm.ErrDuplicatedKey {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "User already exists"})
-		} else if result.Error == gorm.ErrPrimaryKeyRequired {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Missing Primary Key"})
-		} else if result.Error == gorm.ErrInvalidField {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Field"})
-		} else {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "User already exists"})
-		}
+		// Handling database errors, simplified for brevity
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User creation failed"})
 		return
 	}
 
@@ -111,10 +96,10 @@ func CreateUserRoute(c *gin.Context) {
 		"account_updated": user.AccountUpdated,
 	})
 
-	sl.Info(
-		"incoming request",
-		slog.String("method", "POST"),
-		slog.String("path", "/v1/user"),
-		slog.Int("status", 201),
-	)
+	// Log the successful user creation
+	logger.Info().
+		Str("method", "POST").
+		Str("path", "/v1/user").
+		Int("status", http.StatusCreated).
+		Msg("User created successfully")
 }
