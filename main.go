@@ -6,6 +6,7 @@ import (
 	"cloud-proj/health-check/logs" // Ensure this is updated for zerolog.
 	"cloud-proj/health-check/middleware"
 	"cloud-proj/health-check/routes"
+	"fmt"
 	"os"
 	"time"
 
@@ -20,9 +21,11 @@ func main() {
 
 	// Assuming CreateLogger now returns a *zerolog.Logger tailored for your application's needs.
 
-	config.LoadEnv()
+	fmt.Println("Calling create logger")
 
 	logger := logs.CreateLogger()
+
+	config.LoadEnv()
 
 	database.InitDB()
 
