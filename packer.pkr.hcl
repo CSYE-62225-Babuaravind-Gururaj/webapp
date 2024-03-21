@@ -102,6 +102,11 @@ build {
   //   destination = "/tmp/.env"
   // }
 
+  provisioner "file" {
+  source      = "./config.yaml"  
+  destination = "/tmp/config.yaml"     
+}
+
   provisioner "shell" {
     inline = [
       // Create group and user
@@ -145,16 +150,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "echo 'logging:' | sudo tee /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '  receivers:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '    myapp_receiver:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '      type: files' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '      include_paths:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '        - /var/log/myapp/app.log' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '  service:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '    pipelines:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '      logs:' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
-      "echo '        receivers: [myapp_receiver]' | sudo tee -a /etc/google-cloud-ops-agent/config.yaml > /dev/null",
+      "sudo mv /tmp/config.yaml /etc/google-cloud-ops-agent/config.yaml",
       "sudo systemctl enable google-cloud-ops-agent",
       "sudo systemctl restart google-cloud-ops-agent.service"
     ]

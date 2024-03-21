@@ -1,10 +1,2 @@
-{"level":"info","time":"2024-03-20T22:59:19-04:00","message":"Hello from Zerolog!"}
-{"level":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-20T22:59:26-04:00","message":"incoming request"}
-{"level":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-20T22:59:33-04:00","message":"User created successfully"}
-{"level":"error","method":"PUT","path":"/v1/user/self","status":401,"time":"2024-03-20T22:59:43-04:00","message":"Password authentication failed"}
-{"level":"info","method":"PUT","path":"/v1/user/self","status":204,"time":"2024-03-20T22:59:49-04:00","message":"User updated successfully"}
-{"level":"error","method":"GET","path":"/v1/user/self","status":401,"time":"2024-03-20T22:59:56-04:00","message":"Password authentication failed"}
-{"level":"info","time":"2024-03-20T22:59:59-04:00","message":"Entered GetUserSelf handler"}
-{"level":"info","method":"GET","path":"/v1/user/self","status":200,"time":"2024-03-20T22:59:59-04:00","message":"incoming request"}
-{"level":"info","time":"2024-03-20T23:06:15-04:00","message":"Hello from Zerolog!"}
-{"level":"info","time":"2024-03-20T23:07:03-04:00","message":"Hello from Zerolog!"}
+{"severity":"error","method":"GET","path":"/v1/user/self","status":401,"time":"2024-03-21T14:39:54-04:00","message":"Password authentication failed"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T14:39:57-04:00","message":"Health check successful"}

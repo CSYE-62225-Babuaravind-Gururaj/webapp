@@ -1,0 +1,22 @@
+logging:
+  receivers:
+    webapp-receiver:
+      type: files
+      include_paths:
+        - /var/log/myapp/app.log
+      record_log_file_path: true
+  processors:
+    webapp-time-processor:
+      type: parse_json
+      time_key: time
+      time_format: "%Y-%m-%dT%H:%M:%S.%L%Z"
+    move-severity:
+      type: modify_fields
+      fields:
+        severity:
+          move_from: jsonPayload.severity
+  service:
+    pipelines:
+      default_pipeline:
+        receivers: [webapp-receiver]
+        processors: [webapp-time-processor, move-severity]
