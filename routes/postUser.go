@@ -84,8 +84,18 @@ func CreateUserRoute(c *gin.Context) {
 	if result.Error != nil {
 		// Handling database errors, simplified for brevity
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User creation failed"})
+		logger.Error().
+			Str("method", "POST").
+			Str("path", "/v1/user").
+			Int("status", http.StatusBadRequest).
+			Msg("User creation failed")
 		return
 	}
+
+	logger.Debug().
+		Str("action", "User created in database").
+		Str("username", user.Username).
+		Msg("User successfully created")
 
 	c.JSON(http.StatusCreated, gin.H{
 		"id":              user.ID,

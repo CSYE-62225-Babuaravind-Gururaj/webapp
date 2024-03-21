@@ -3,9 +3,9 @@ package database
 import (
 	"cloud-proj/health-check/models"
 	"fmt"
-	"log"
 	"os"
 
+	"github.com/rs/zerolog/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -27,18 +27,16 @@ func InitDB() {
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {
-		log.Fatal("Failed to connect to DB: ", err)
+		log.Fatal().Err(err).Msg("Failed to connect to DB")
 	}
 
 	err = DB.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";").Error
 	if err != nil {
-		log.Fatalf("Failed to create extension 'uuid-ossp ': %v", err)
+		log.Fatal().Err(err).Msg("Failed to create extension 'uuid-ossp'")
 	}
 
-	log.Println("mirgating")
 	if err := DB.AutoMigrate(&models.User{}); err != nil {
-		log.Panic("Failed to auto-migrate:", err)
+		log.Fatal().Err(err).Msg("Failed to auto-migrate")
 	}
 
-	log.Println("Auto-migration done")
 }

@@ -5,13 +5,14 @@ package testUtils
 import (
 	"cloud-proj/health-check/database"
 	"cloud-proj/health-check/models"
-	"log"
+
+	"github.com/rs/zerolog/log"
 )
 
 func GetTestUserFromDB() (models.User, error) {
 	var user models.User
 	if err := database.DB.Where("username = ?", "john.doe@example.com").First(&user).Error; err != nil {
-		log.Printf("Failed to fetch test user: %v", err)
+		log.Error().Err(err).Msg("Failed to fetch test user")
 		return models.User{}, err
 	}
 	return user, nil
