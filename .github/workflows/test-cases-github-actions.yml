@@ -78,7 +78,9 @@ jobs:
       run: go test -v ./tests;
 
     - name: Build the Go application
-      run:  go build -v ./...
+      run: |
+          GOOS=linux GOARCH=amd64 go build -v -o webapp .
+          ls -la
 
     - name: GCloud authentication
       uses: 'google-github-actions/auth@v2'
