@@ -79,7 +79,7 @@ jobs:
 
     - name: Build the Go application
       run: |
-          GOOS=linux GOARCH=amd64 go build -v -o webapp .
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -v -o webapp .
           ls -la
 
     - name: GCloud authentication
