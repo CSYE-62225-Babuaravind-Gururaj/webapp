@@ -5,19 +5,13 @@ import (
 	"cloud-proj/health-check/logs"
 	"cloud-proj/health-check/models"
 	"cloud-proj/health-check/utils"
-	"log/slog"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap/exp/zapslog"
 )
 
 func UpdateUserRoute(c *gin.Context) {
 	logger := logs.CreateLogger()
-
-	defer logger.Sync()
-
-	sl := slog.New(zapslog.NewHandler(logger.Core(), nil))
 
 	user, exists := c.Get("user")
 	if !exists {
@@ -79,12 +73,12 @@ func UpdateUserRoute(c *gin.Context) {
 		}
 
 		c.Status(http.StatusNoContent)
-		sl.Info(
-			"incoming request",
-			slog.String("method", "PUT"),
-			slog.String("path", "/v1/user/self"),
-			slog.Int("status", 204),
-		)
-	}
 
+		// Log the successful user update
+		logger.Info().
+			Str("method", "PUT").
+			Str("path", "/v1/user/self").
+			Int("status", http.StatusNoContent).
+			Msg("User updated successfully")
+	}
 }
