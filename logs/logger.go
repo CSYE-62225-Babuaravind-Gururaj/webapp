@@ -1,14 +1,14 @@
 package logs
 
 import (
-	"fmt"
+	"log"
 	"os"
 
 	"github.com/rs/zerolog"
 )
 
 func CreateLogger() zerolog.Logger {
-	println("hello")
+	log.Println("hello")
 	println(os.Getenv("RUN_ENV"))
 	if os.Getenv("RUN_ENV") == "test" {
 		return zerolog.New(zerolog.ConsoleWriter{Out: os.Stdout}).With().Timestamp().Logger()
@@ -20,7 +20,7 @@ func CreateLogger() zerolog.Logger {
 	if err != nil {
 		// If opening the log file fails, panic. Alternatively, you could handle this error differently.
 		os.Stdout.Write([]byte("Opening file failed"))
-		fmt.Print(err)
+		log.Println(err)
 	}
 
 	defer logFile.Close()
@@ -28,7 +28,7 @@ func CreateLogger() zerolog.Logger {
 	message := "Hello, writing directly to app.log\n"
 	if _, err := logFile.WriteString(message); err != nil {
 		// Handle error (panic for simplicity here)
-		fmt.Print(err)
+		log.Println(err)
 	}
 
 	// For non-test environments, return a logger that writes to both the file and stdout.
