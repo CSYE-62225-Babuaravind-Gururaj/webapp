@@ -82,10 +82,10 @@ build {
   //   script = "./db.sh"
   // }
 
-  // provisioner "file" {
-  //   source      = "./webapp"
-  //   destination = "/tmp/webapp"
-  // }
+  provisioner "file" {
+    source      = "./webapp"
+    destination = "/tmp/webapp"
+  }
 
   provisioner "file" {
     source      = "./webapp.zip"
