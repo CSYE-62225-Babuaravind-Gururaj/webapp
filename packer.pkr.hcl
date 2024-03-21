@@ -103,9 +103,9 @@ build {
   // }
 
   provisioner "file" {
-  source      = "./config.yaml"  
-  destination = "/tmp/config.yaml"     
-}
+    source      = "./config.yaml"
+    destination = "/tmp/config.yaml"
+  }
 
   provisioner "shell" {
     inline = [
