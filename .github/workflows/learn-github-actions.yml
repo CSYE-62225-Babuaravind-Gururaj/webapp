@@ -19,7 +19,7 @@ jobs:
         run: go get .
       - name: Build
         run: |
-          GOOS=linux GOARCH=amd64 go build -v -o webapp
+          GOOS=linux GOARCH=amd64 go build -v -o webapp ./...
       - name: Test with the Go CLI
         run: go test
 
