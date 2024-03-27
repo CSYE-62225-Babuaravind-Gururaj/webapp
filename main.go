@@ -6,6 +6,7 @@ import (
 	"cloud-proj/health-check/logs" // Ensure this is updated for zerolog.
 	"cloud-proj/health-check/middleware"
 	"cloud-proj/health-check/routes"
+	"cloud-proj/health-check/utils"
 	"os"
 	"time"
 
@@ -30,6 +31,8 @@ func main() {
 
 	logger.Info().Msg("Hello from Zerolog!")
 
+	utils.InitPubSubClient()
+
 	router := gin.Default()
 
 	// If middleware and routes need the logger, consider passing it as an argument or using a context.
@@ -37,13 +40,18 @@ func main() {
 
 	router.GET("/healthz", routes.RouteHealthz(database.DB))
 
-	router.GET("/v1/user/self", middleware.BasicAuth(), routes.GetUserRoute)
-
-	router.PUT("/v1/user/self", middleware.BasicAuth(), routes.UpdateUserRoute)
+	authenticatedAndVerified := router.Group("/")
+	authenticatedAndVerified.Use(middleware.BasicAuth(), middleware.UserVerificationMiddleware())
+	{
+		authenticatedAndVerified.GET("/v1/user/self", routes.GetUserRoute)
+		authenticatedAndVerified.PUT("/v1/user/self", routes.UpdateUserRoute)
+	}
 
 	router.POST("/v1/user", routes.CreateUserRoute)
 
 	router.NoRoute(middleware.HandleNoRoute)
+
+	router.GET("/v1/user/verify", routes.VerifyUserRoute)
 
 	router.Run(":8080")
 }

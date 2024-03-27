@@ -33,3 +33,46 @@
 {"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:49:00-04:00","message":"Health check successful"}
 {"severity":"warn","method":"GET","path":"/healthz","hitCount":7,"time":"2024-03-21T18:49:01-04:00","message":"Rate limit warning: /healthz endpoint is being hit too frequently"}
 {"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-21T18:49:01-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-26T02:20:29-04:00","message":"Health check successful"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-26T02:20:41-04:00","message":"User creation failed"}
+{"severity":"debug","action":"User created in database","username":"jane.doe20@example.com","time":"2024-03-26T02:23:15-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-26T02:23:15-04:00","message":"User created successfully"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-26T02:31:17-04:00","message":"User creation failed"}
+{"severity":"debug","action":"User created in database","username":"jane.doe21@example.com","time":"2024-03-26T02:40:13-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-26T02:40:13-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"jane.doe22@example.com","time":"2024-03-26T02:53:43-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-26T02:53:43-04:00","message":"User created successfully"}
+{"severity":"info","method":"PUT","path":"/v1/user/self","status":204,"time":"2024-03-26T03:01:27-04:00","message":"User updated successfully"}
+{"severity":"debug","action":"User created in database","username":"jane.doe23@example.com","time":"2024-03-26T03:02:12-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-26T03:02:12-04:00","message":"User created successfully"}
+{"severity":"info","time":"2024-03-26T03:02:18-04:00","message":"Entered GetUserSelf handler"}
+{"severity":"info","time":"2024-03-26T03:02:36-04:00","message":"Entered GetUserSelf handler"}
+{"severity":"info","method":"GET","path":"/v1/user/self","status":200,"time":"2024-03-26T03:02:36-04:00","message":"incoming request"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-26T17:56:18-04:00","message":"Health check successful"}
+{"severity":"debug","action":"User created in database","username":"jane.doe24@example.com","time":"2024-03-26T17:56:29-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-26T17:56:29-04:00","message":"User created successfully"}
+{"severity":"error","error":"context deadline exceeded","time":"2024-03-26T17:57:29-04:00","message":"Failed to publish message to Pub/Sub"}
+{"severity":"debug","action":"User created in database","username":"jane.doe25@example.com","time":"2024-03-26T18:40:15-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-26T18:40:15-04:00","message":"User created successfully"}
+{"severity":"error","error":"rpc error: code = NotFound desc = Topic not found","time":"2024-03-26T18:40:15-04:00","message":"Failed to publish message to Pub/Sub"}
+{"severity":"debug","action":"User created in database","username":"jane.doe26@example.com","time":"2024-03-27T01:13:26-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T01:13:26-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"jane.doe27@example.com","time":"2024-03-27T03:27:49-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T03:27:49-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"jane.doe7@example.com","time":"2024-03-27T03:57:14-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T03:57:14-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-03-27T03:58:13-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T03:58:13-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gururaj.b@northeastern.edu","time":"2024-03-27T04:22:29-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:22:29-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"b.gururaj@northeastern.edu","time":"2024-03-27T04:27:33-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:27:33-04:00","message":"User created successfully"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-27T04:39:02-04:00","message":"User creation failed"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-27T04:39:20-04:00","message":"User creation failed"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmai.com","time":"2024-03-27T04:39:35-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:39:35-04:00","message":"User created successfully"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-27T04:41:41-04:00","message":"User creation failed"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-03-27T04:42:48-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:42:48-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gururaj.b@northeastern.edu","time":"2024-03-27T04:50:26-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:50:26-04:00","message":"User created successfully"}

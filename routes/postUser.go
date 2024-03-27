@@ -5,7 +5,10 @@ import (
 	"cloud-proj/health-check/logs"
 	"cloud-proj/health-check/models"
 	"cloud-proj/health-check/utils"
+	"encoding/json"
+	"fmt"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -112,4 +115,30 @@ func CreateUserRoute(c *gin.Context) {
 		Str("path", "/v1/user").
 		Int("status", http.StatusCreated).
 		Msg("User created successfully")
+
+	verifyLink := fmt.Sprintf("http://localhost:8080/v1/user/verify?email=%s&token=%s", url.QueryEscape(user.Username), user.ID.String())
+
+	msgData, err := json.Marshal(map[string]interface{}{
+		"email":      user.Username,
+		"userId":     user.ID,
+		"verifyLink": verifyLink,
+	})
+	if err != nil {
+		logger.Error().Err(err).Msg("Failed to marshal message data")
+	} else {
+		if err := utils.PublishMessage("verify_email", msgData); err != nil {
+			logger.Error().Err(err).Msg("Failed to publish message to Pub/Sub")
+		}
+	}
+
+	verificationEntry := models.VerifyUser{
+		Username:         user.Username,
+		EmailTriggerTime: time.Now(),
+		EmailVerified:    false,
+	}
+	if err := database.DB.Create(&verificationEntry).Error; err != nil {
+		logger.Error().Err(err).Msg("Failed to create verification entry")
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to initiate verification process"})
+		return
+	}
 }

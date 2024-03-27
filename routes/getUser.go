@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"cloud-proj/health-check/database"
 	"cloud-proj/health-check/logs"
 	"cloud-proj/health-check/models"
 	"net/http"
@@ -29,6 +30,20 @@ func GetUserRoute(c *gin.Context) {
 	authUser, ok := user.(models.User)
 	if !ok {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User Not Found"})
+		return
+	}
+
+	//declare and fetch verifyUser data
+	var userVerify models.VerifyUser
+	if err := database.DB.Where("username = ?", authUser.Username).First(&userVerify).Error; err != nil {
+		// If there's an error fetching the record, it could mean the record doesn't exist
+		logger.Error().Err(err).Msg("Failed to fetch verification status")
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to verify user status"})
+		return
+	}
+
+	if !userVerify.EmailVerified {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Email not verified"})
 		return
 	}
 

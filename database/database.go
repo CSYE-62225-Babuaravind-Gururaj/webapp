@@ -39,4 +39,7 @@ func InitDB() {
 		log.Fatal().Err(err).Msg("Failed to auto-migrate")
 	}
 
+	if err := DB.AutoMigrate(&models.VerifyUser{}); err != nil {
+		log.Fatal().Err(err).Msg("Failed to auto-migrate verify user")
+	}
 }
