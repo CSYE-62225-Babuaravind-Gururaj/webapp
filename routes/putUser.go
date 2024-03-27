@@ -25,6 +25,20 @@ func UpdateUserRoute(c *gin.Context) {
 		return
 	}
 
+	//declare and fetch verifyUser data
+	var userVerify models.VerifyUser
+	if err := database.DB.Where("username = ?", authUser.Username).First(&userVerify).Error; err != nil {
+		// If there's an error fetching the record, it could mean the record doesn't exist
+		logger.Error().Err(err).Msg("Failed to fetch verification status")
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to verify user status"})
+		return
+	}
+
+	if !userVerify.EmailVerified {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Email not verified"})
+		return
+	}
+
 	var updateReq models.UpdateUser
 	if err := c.ShouldBindJSON(&updateReq); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request data"})
