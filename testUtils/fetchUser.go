@@ -17,3 +17,12 @@ func GetTestUserFromDB() (models.User, error) {
 	}
 	return user, nil
 }
+
+func GetVerifyTestUserFromDB() (models.VerifyUser, error) {
+	var verification models.VerifyUser
+	if err := database.DB.Where("username = ?", "john.doe@example.com").First(&verification).Error; err != nil {
+		log.Error().Err(err).Msg("Failed to fetch test user")
+		return models.VerifyUser{}, err
+	}
+	return verification, nil
+}

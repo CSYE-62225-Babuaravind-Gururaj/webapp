@@ -76,3 +76,6 @@
 {"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:42:48-04:00","message":"User created successfully"}
 {"severity":"debug","action":"User created in database","username":"gururaj.b@northeastern.edu","time":"2024-03-27T04:50:26-04:00","message":"User successfully created"}
 {"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T04:50:26-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"abcd@gmail.com","time":"2024-03-27T23:15:35-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T23:15:35-04:00","message":"User created successfully"}
+{"severity":"error","error":"rpc error: code = NotFound desc = Resource not found (resource=verify_email).","time":"2024-03-27T23:15:35-04:00","message":"Failed to publish message to Pub/Sub"}

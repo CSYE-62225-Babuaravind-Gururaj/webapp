@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func CreateTestUser() models.User {
+func CreateTestUser() (models.User, models.VerifyUser, error) {
 	database.InitDB()
 
 	pass, err := utils.HashPassword("Abcd1234")
@@ -31,5 +31,15 @@ func CreateTestUser() models.User {
 		log.Printf("Failed to create test user: %v", result.Error)
 	}
 
-	return user
+	verifyUser := models.VerifyUser{
+		Username:         user.Username,
+		EmailTriggerTime: time.Now(),
+		EmailVerified:    false,
+	}
+	verifyResult := database.DB.Create(&verifyUser)
+	if verifyResult.Error != nil {
+		log.Printf("Failed to create test user: %v", verifyResult.Error)
+	}
+
+	return user, verifyUser, nil
 }

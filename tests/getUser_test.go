@@ -20,8 +20,8 @@ func TestGetUser(t *testing.T) {
 
 	database.InitDB()
 
-	// Create a test user
-	testUser := testUtils.CreateTestUser()
+	// Create a test user, _ here is used to ignore second variable returned as we don't need it
+	testUser, _, err := testUtils.CreateTestUser()
 
 	// Set up your application router
 	router := router.RouterSetup(database.DB)
@@ -39,4 +39,5 @@ func TestGetUser(t *testing.T) {
 	if w.Code != http.StatusOK {
 		t.Errorf("Expected status code %d, got %d", http.StatusOK, w.Code)
 	}
+
 }
