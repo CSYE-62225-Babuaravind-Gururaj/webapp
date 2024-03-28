@@ -45,6 +45,14 @@ jobs:
       with:
         go-version: '^1.21.6'
 
+    - name: GCloud authentication
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: 'GCloud SDK setup'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
     #Because Git is trying to install some default Go version otherwise
     - name: Cache Go Modules
       uses: actions/cache@v2
@@ -82,14 +90,6 @@ jobs:
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -v -o webapp .
           ls -la
 
-    - name: GCloud authentication
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-
-    - name: 'GCloud SDK setup'
-      uses: 'google-github-actions/setup-gcloud@v2'
-
     - name: Packer setup
       uses: hashicorp/setup-packer@main
       id: setup
@@ -99,45 +99,6 @@ jobs:
     - name: Packer init
       id: init
       run: "packer init ./packer.pkr.hcl"
-
-    # - name: set webapp Variables
-    #   uses: DamianReeves/write-file-action@master
-    #   with:
-    #     path: './webapp.service'
-    #     write-mode: overwrite
-    #     contents: |
-    #       [Unit]
-    #       Description=Go Web Application
-    #       After=network.target
-
-    #       [Service]
-    #       ExecStartPre=/bin/sleep 10
-    #       User=csye6225
-    #       Group=csye6225
-    #       Environment=DBHOST=${{ secrets.DB_HOST }}
-    #       Environment=DBPORT=${{ secrets.DB_PORT }}
-    #       Environment=DBUSER=${{ secrets.DB_USER }}
-    #       Environment=DBPASS=${{ secrets.DB_PASS }}
-    #       Environment=DBNAME=${{ secrets.DB_NAME }}
-    #       ExecStart=/usr/local/bin/webapp
-
-    #       [Install]
-    #       WantedBy=multi-user.target
-
-    # - name: set webapp Variables
-    #   uses: DamianReeves/write-file-action@master
-    #   with:
-    #     path: './db.sh'
-    #     write-mode: overwrite
-    #     contents: |
-    #       #!/bin/sh
-    #       sudo sed -i 's/ident/md5/g' /var/lib/pgsql/data/pg_hba.conf
-    #       sudo su - postgres <<EOF
-    #       psql -c "CREATE USER ${{ secrets.DB_USER }} WITH PASSWORD 'root';"
-    #       psql -c "CREATE DATABASE ${{ secrets.DB_NAME }};"
-    #       psql -c "GRANT ALL PRIVILEGES ON DATABASE ${{ secrets.DB_NAME }} TO ${{ secrets.DB_USER }};"
-    #       psql -c "ALTER USER ${{ secrets.DB_USER }} WITH SUPERUSER;"
-    #       EOF
 
     - name: Run Packer
       env:
