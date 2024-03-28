@@ -2,8 +2,10 @@ package tests
 
 import (
 	"cloud-proj/health-check/database"
+	"cloud-proj/health-check/models"
 	"cloud-proj/health-check/router"
 	"cloud-proj/health-check/testUtils"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -23,8 +25,26 @@ func TestGetUser(t *testing.T) {
 	// Create a test user, _ here is used to ignore second variable returned as we don't need it
 	testUser, _, err := testUtils.CreateTestUser()
 
+	var user models.User
+	err = database.DB.Order("id DESC").First(&user).Error
+	if err != nil {
+		t.Fatalf("Failed to fetch an existing user: %v", err)
+	}
+
+	// Fetch the associated VerifyUser entry to get the token (ID in this case).
+	var verifyUser models.VerifyUser
+	err = database.DB.Where("username = ?", user.Username).First(&verifyUser).Error
+	if err != nil {
+		t.Fatalf("Failed to fetch VerifyUser entry for the user: %v", err)
+	}
+
 	// Set up your application router
 	router := router.RouterSetup(database.DB)
+
+	err = testUtils.VerifyUserByEmailToken(fmt.Sprint(verifyUser.ID))
+	if err != nil {
+		t.Fatalf("Verification failed: %v", err)
+	}
 
 	req, _ := http.NewRequest("GET", "/v1/user/self", nil)
 
