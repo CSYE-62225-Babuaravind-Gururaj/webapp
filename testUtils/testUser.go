@@ -35,6 +35,7 @@ func CreateTestUser() (models.User, models.VerifyUser, error) {
 		Username:         user.Username,
 		EmailTriggerTime: time.Now(),
 		EmailVerified:    false,
+		Token:            user.ID.String(),
 	}
 	verifyResult := database.DB.Create(&verifyUser)
 	if verifyResult.Error != nil {
