@@ -79,3 +79,41 @@
 {"severity":"debug","action":"User created in database","username":"abcd@gmail.com","time":"2024-03-27T23:15:35-04:00","message":"User successfully created"}
 {"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-27T23:15:35-04:00","message":"User created successfully"}
 {"severity":"error","error":"rpc error: code = NotFound desc = Resource not found (resource=verify_email).","time":"2024-03-27T23:15:35-04:00","message":"Failed to publish message to Pub/Sub"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-03-28T21:07:07-04:00","message":"Health check successful"}
+{"severity":"debug","action":"User created in database","username":"gokul@gmail.com","time":"2024-03-28T21:07:25-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:07:25-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul1@gmail.com","time":"2024-03-28T21:13:33-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:13:33-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul2@gmail.com","time":"2024-03-28T21:15:23-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:15:23-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul3@gmail.com","time":"2024-03-28T21:17:08-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:17:08-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul4@gmail.com","time":"2024-03-28T21:20:43-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:20:43-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul5@gmail.com","time":"2024-03-28T21:22:38-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:22:38-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul6@gmail.com","time":"2024-03-28T21:25:51-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:25:51-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul7@gmail.com","time":"2024-03-28T21:29:58-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:29:58-04:00","message":"User created successfully"}
+{"severity":"info","time":"2024-03-28T21:30:21-04:00","message":"Entered GetUserSelf handler"}
+{"severity":"info","method":"GET","path":"/v1/user/self","status":200,"time":"2024-03-28T21:30:21-04:00","message":"incoming request"}
+{"severity":"debug","action":"User created in database","username":"gokulshyam567@gmail.com","time":"2024-03-28T21:30:50-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:30:50-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-03-28T21:48:16-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T21:48:16-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul8@gmail.com","time":"2024-03-28T22:16:18-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T22:16:18-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul9@gmail.com","time":"2024-03-28T22:24:07-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T22:24:07-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul10@gmail.com","time":"2024-03-28T22:30:24-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T22:30:24-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul18@gmail.com","time":"2024-03-28T22:39:08-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T22:39:08-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul11@gmail.com","time":"2024-03-28T22:53:53-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T22:53:53-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gokul12@gmail.com","time":"2024-03-28T22:58:44-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T22:58:44-04:00","message":"User created successfully"}
+{"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-28T23:00:01-04:00","message":"User creation failed"}
+{"severity":"debug","action":"User created in database","username":"gokulshyam567@gmail.com","time":"2024-03-28T23:01:07-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T23:01:07-04:00","message":"User created successfully"}
