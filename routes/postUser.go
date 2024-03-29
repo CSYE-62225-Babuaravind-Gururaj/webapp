@@ -118,7 +118,7 @@ func CreateUserRoute(c *gin.Context) {
 
 	msgData, err := json.Marshal(map[string]interface{}{
 		"email": user.Username,
-		"token": user.ID,
+		"token": user.ID.String(),
 	})
 	if err != nil {
 		logger.Error().Err(err).Msg("Failed to marshal message data")
@@ -132,6 +132,7 @@ func CreateUserRoute(c *gin.Context) {
 		Username:         user.Username,
 		EmailTriggerTime: time.Now(),
 		EmailVerified:    false,
+		Token:            user.ID.String(),
 	}
 	if err := database.DB.Create(&verificationEntry).Error; err != nil {
 		logger.Error().Err(err).Msg("Failed to create verification entry")
