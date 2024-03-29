@@ -28,7 +28,13 @@ func VerifyUserByEmailToken(token string) error {
 
 	// Fetch the updated verification entry from the database
 	var verification models.VerifyUser
-	if err := database.DB.Where("id = ?", token).First(&verification).Error; err != nil {
+
+	// err := database.DB.Order("id DESC").First(&verification).Error
+	// if err != nil {
+	// 	log.Printf("Failed to fetch an existing user: %v", err)
+	// }
+
+	if err := database.DB.Where("token = ?", token).First(&verification).Error; err != nil {
 		log.Printf("Failed to fetch verification entry: %v", err)
 	}
 

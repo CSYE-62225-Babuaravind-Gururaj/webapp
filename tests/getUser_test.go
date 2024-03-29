@@ -32,8 +32,8 @@ func TestGetUser(t *testing.T) {
 	}
 
 	// Fetch the associated VerifyUser entry to get the token (ID in this case).
-	var verifyUser models.VerifyUser
-	err = database.DB.Where("username = ?", user.Username).First(&verifyUser).Error
+	//var verifyUser models.VerifyUser
+	err = database.DB.Where("username = ?", user.Username).First(&user).Error
 	if err != nil {
 		t.Fatalf("Failed to fetch VerifyUser entry for the user: %v", err)
 	}
@@ -41,7 +41,7 @@ func TestGetUser(t *testing.T) {
 	// Set up your application router
 	router := router.RouterSetup(database.DB)
 
-	err = testUtils.VerifyUserByEmailToken(fmt.Sprint(verifyUser.ID))
+	err = testUtils.VerifyUserByEmailToken(fmt.Sprint(user.ID))
 	if err != nil {
 		t.Fatalf("Verification failed: %v", err)
 	}
