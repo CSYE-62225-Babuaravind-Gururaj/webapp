@@ -20,3 +20,5 @@ go.work
 webapp
 
 health-check
+
+logs/app.log
