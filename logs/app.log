@@ -117,3 +117,17 @@
 {"severity":"error","method":"POST","path":"/v1/user","status":400,"time":"2024-03-28T23:00:01-04:00","message":"User creation failed"}
 {"severity":"debug","action":"User created in database","username":"gokulshyam567@gmail.com","time":"2024-03-28T23:01:07-04:00","message":"User successfully created"}
 {"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-03-28T23:01:07-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T00:21:21-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:21:21-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T00:31:46-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:31:46-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T00:42:41-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:42:41-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T00:48:09-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:48:09-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T00:52:33-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:52:33-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T00:59:55-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:59:55-04:00","message":"User created successfully"}
+{"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T01:05:39-04:00","message":"User successfully created"}
+{"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T01:05:39-04:00","message":"User created successfully"}
