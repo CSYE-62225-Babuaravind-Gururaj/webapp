@@ -107,4 +107,29 @@ jobs:
         DBUSER: ${{ secrets.DBUSER }}
         DBPASS: ${{ secrets.DBPASS }}
         DBNAME: ${{ secrets.DBNAME }}
-      run: packer build packer.pkr.hcl
+      run: |
+        IMAGE_NAME=$(packer build -machine-readable packer.pkr.hcl | awk -F, '$0 ~/artifact,0,id/ {gsub(".*images/",""); print $6}')
+        echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+      
+    - name: Create New Instance Template with GCP Image
+      run: |
+        gcloud compute instance-templates create "webapp-template-$(date +%s)" \
+          --image="${{ env.IMAGE_NAME }}" \
+          --machine-type="n1-standard-1" \
+          --region="us-central1"
+      env:
+        IMAGE_NAME: ${{ secrets.GCP_IMAGE_ID }}
+
+    - name: Update Managed Instance Group with New Template
+      run: |
+        LATEST_TEMPLATE=$(gcloud compute instance-templates list --filter="name:webapp-template*" --format="get(name)" --limit=1)
+        gcloud compute instance-groups managed set-instance-template ${{ secrets.MIG_NAME }} \
+          --template=$LATEST_TEMPLATE \
+          --zone=us-central1-b
+
+    - name: Start Rolling Update on Managed Instance Group
+      run: |
+        gcloud compute instance-groups managed rolling-action start-update ${{ secrets.MIG_NAME }} \
+          --version template=$LATEST_TEMPLATE \
+          --zone=us-central1-b \
+          --type=proactive
