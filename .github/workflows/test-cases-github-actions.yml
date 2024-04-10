@@ -107,7 +107,7 @@ jobs:
         DBUSER: ${{ secrets.DBUSER }}
         DBPASS: ${{ secrets.DBPASS }}
         DBNAME: ${{ secrets.DBNAME }}
-      run: echo "SOURCE_IMAGE=webapp-20240410092007" >> $GITHUB_ENV
+      run: echo "SOURCE_IMAGE=$(packer build -machine-readable . | grep -m 1 "A disk image was created" | awk '{print $NF}')" >> $GITHUB_ENV
     
     - name: Get Source Name for Image
       run: |
