@@ -72,9 +72,10 @@ func RouteHealthz(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		c.Header("Content-Type", "text/plain")
+		// c.Header("Content-Type", "text/plain")
 		c.Header("Cache-Control", "no-cache, no-store, must-revalidate")
-		c.String(http.StatusOK, "CI/CD check done")
+		// c.String(http.StatusOK, "CI/CD check done")
+		c.Status(http.StatusOK)
 
 		// Log the successful health check
 		logger.Info().
