@@ -121,7 +121,7 @@ jobs:
         --source-instance=${{ env.IMAGE_NAME }} \
         --source-instance-zone=${{ env.ZONE }} \
         --instance-template-region=${{ secrets.REGION }} \
-        --configure-disk=device-name=${{secrets.DEVICE_NAME}},instantiate-from=custom-image,custom-image=projects/${{secrets.PROJECT_ID}}/global/images/${{ env.CUSTOM_NAME}},auto-delete=true | awk 'NR==2{print $1}')" >> $GITHUB_ENV
+        --configure-disk=device-name=${{secrets.DEVICE_NAME}},instantiate-from=custom-image,custom-image=projects/${{secrets.PROJECT_ID}}/global/images/${{env.IMAGE_NAME}},auto-delete=true | awk 'NR==2{print $1}')" >> $GITHUB_ENV
     
     - name: Update MIG
       run: |
