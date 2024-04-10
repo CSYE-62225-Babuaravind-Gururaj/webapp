@@ -28,7 +28,5 @@ func RouterSetup(db *gorm.DB) *gin.Engine {
 
 	router.GET("/v1/user/verify", routes.VerifyUserRoute)
 
-	router.GET("/v1/user/check")
-
 	return router
 }

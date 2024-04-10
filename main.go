@@ -53,7 +53,5 @@ func main() {
 
 	router.GET("/v1/user/verify", routes.VerifyUserRoute)
 
-	router.GET("/v1/user/check", routes.GetUserRoute)
-
 	router.Run(":8080")
 }
