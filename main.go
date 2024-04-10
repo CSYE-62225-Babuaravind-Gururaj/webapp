@@ -43,7 +43,7 @@ func main() {
 	authenticatedAndVerified := router.Group("/")
 	authenticatedAndVerified.Use(middleware.BasicAuth(), middleware.UserVerificationMiddleware())
 	{
-		authenticatedAndVerified.GET("/v1/user/self", routes.GetUserRoute)
+		authenticatedAndVerified.GET("/v1/user/selfs", routes.GetUserRoute)
 		authenticatedAndVerified.PUT("/v1/user/self", routes.UpdateUserRoute)
 	}
 
