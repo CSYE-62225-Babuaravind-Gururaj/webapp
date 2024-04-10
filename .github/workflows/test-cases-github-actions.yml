@@ -111,7 +111,7 @@ jobs:
     
     - name: Get Source Name for Image
       run: |
-        read -r name zone <<< $(gcloud compute instance-groups managed list-instances ${{ secrets.MIG_NAME }} --region=${{ secrets.REGION }} | awk '/HEALTHY/{print $1, $2; exit}')
+        read -r name zone <<< $(gcloud compute instance-groups managed list-instances ${{ secrets.MIG_NAME }} --region=${{ secrets.REGION }} | awk '/RUNNING/{print $1, $2; exit}')
         echo "IMAGE_NAME=$name" >> $GITHUB_ENV
         echo "ZONE=$zone" >> $GITHUB_ENV
     
@@ -121,7 +121,7 @@ jobs:
         --source-instance=${{ env.IMAGE_NAME }} \
         --source-instance-zone=${{ env.ZONE }} \
         --instance-template-region=${{ secrets.REGION }} \
-        --configure-disk=instantiate-from=custom-image,custom-image=projects/${{secrets.PROJECT_ID}}/global/images/${{ env.CUSTOM_NAME}},auto-delete=true | awk 'NR==2{print $1}')" >> $GITHUB_ENV
+        --configure-disk=device-name=${{secrets.DEVICE_NAME}},instantiate-from=custom-image,custom-image=projects/${{secrets.PROJECT_ID}}/global/images/${{ env.CUSTOM_NAME}},auto-delete=true | awk 'NR==2{print $1}')" >> $GITHUB_ENV
     
     - name: Update MIG
       run: |
