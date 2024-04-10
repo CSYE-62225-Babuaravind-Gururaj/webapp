@@ -131,3 +131,6 @@
 {"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T00:59:55-04:00","message":"User created successfully"}
 {"severity":"debug","action":"User created in database","username":"gababu7@gmail.com","time":"2024-04-03T01:05:39-04:00","message":"User successfully created"}
 {"severity":"info","method":"POST","path":"/v1/user","status":201,"time":"2024-04-03T01:05:39-04:00","message":"User created successfully"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-04-10T02:45:39-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-04-10T02:46:07-04:00","message":"Health check successful"}
+{"severity":"info","method":"GET","path":"/healthz","status":200,"time":"2024-04-10T02:46:10-04:00","message":"Health check successful"}
