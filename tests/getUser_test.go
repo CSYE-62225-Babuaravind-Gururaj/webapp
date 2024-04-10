@@ -46,7 +46,7 @@ func TestGetUser(t *testing.T) {
 		t.Fatalf("Verification failed: %v", err)
 	}
 
-	req, _ := http.NewRequest("GET", "/v1/user/selfs", nil)
+	req, _ := http.NewRequest("GET", "/v1/user/self", nil)
 
 	// Basic Auth header
 	req.SetBasicAuth(testUser.Username, "Abcd1234")
