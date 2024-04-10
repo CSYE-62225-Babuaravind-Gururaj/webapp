@@ -110,36 +110,30 @@ jobs:
       run: echo "SOURCE_IMAGE=$(packer build -machine-readable . | grep -m 1 "A disk image was created" | awk '{print $NF}')" >> $GITHUB_ENV
     
     - name: Get Source Name for Image
-      id: get_source_name_zone
       run: |
         read -r name zone <<< $(gcloud compute instance-groups managed list-instances ${{ secrets.MIG_NAME }} --region=${{ secrets.REGION }} | awk '/HEALTHY/{print $1, $2; exit}')
         echo "IMAGE_NAME=$name" >> $GITHUB_ENV
         echo "ZONE=$zone" >> $GITHUB_ENV
     
     - name: Create Instance Template with GCP Image
-      id: recreate_template
       run: |
-        echo "TEMPLATE_NAME=$(gcloud compute instance-templates create "${{ secrets.TEMPLATE_PREFIX }}-$(date +%s)" \
+        echo "TEMPLATE_DETAILS=$(gcloud compute instance-templates create "${{ secrets.TEMPLATE_PREFIX }}-$(date +%s)" \
         --source-instance=${{ env.IMAGE_NAME }} \
         --source-instance-zone=${{ env.ZONE }} \
         --instance-template-region=${{ secrets.REGION }} \
-        --image=${{ env.SOURCE_IMAGE }} \
-        --configure-disk=device-name=${{ secrets.DISK_DEVICE_NAME }},auto-delete=true | awk 'NR==2{print $1}')" >> $GITHUB_ENV
+        --image=${{ env.SOURCE_IMAGE }} | awk 'NR==2{print $1}')" >> $GITHUB_ENV
     
     - name: Update MIG
-      id: update_mig
       run: |
         gcloud compute instance-groups managed set-instance-template ${{ secrets.MIG_NAME }} \
-        --template=projects/${{ secrets.PROJECT_ID }}/regions/${{ secrets.REGION }}/instanceTemplates/${{ env.TEMPLATE_NAME }} \
+        --template=projects/${{ secrets.PROJECT_ID }}/regions/${{ secrets.REGION }}/instanceTemplates/${{ env.TEMPLATE_DETAILS }} \
         --region=${{ secrets.REGION }}
     
     - name: Rolling start update
-      id: group_update
       run: |
         gcloud compute instance-groups managed rolling-action start-update ${{ secrets.MIG_NAME }} \
-        --version=template=projects/${{ secrets.PROJECT_ID }}/regions/${{ secrets.REGION }}/instanceTemplates/${{ env.TEMPLATE_NAME }} \
+        --version=template=projects/${{ secrets.PROJECT_ID }}/regions/${{ secrets.REGION }}/instanceTemplates/${{ env.TEMPLATE_DETAILS }} \
         --region=${{ secrets.REGION }}
     
     - name: Update check
-      id: update_status
       run: gcloud compute instance-groups managed wait-until ${{ secrets.MIG_NAME }} --version-target-reached --region=${{ secrets.REGION }}
