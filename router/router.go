@@ -18,15 +18,15 @@ func RouterSetup(db *gorm.DB) *gin.Engine {
 	authenticatedAndVerified := router.Group("/")
 	authenticatedAndVerified.Use(middleware.BasicAuth(), middleware.UserVerificationMiddleware())
 	{
-		authenticatedAndVerified.GET("/v1/user/self", routes.GetUserRoute)
-		authenticatedAndVerified.PUT("/v1/user/self", routes.UpdateUserRoute)
+		authenticatedAndVerified.GET("/v2/user/self", routes.GetUserRoute)
+		authenticatedAndVerified.PUT("/v2/user/self", routes.UpdateUserRoute)
 	}
 
-	router.POST("/v1/user", routes.CreateUserRoute)
+	router.POST("/v2/user", routes.CreateUserRoute)
 
 	router.NoRoute(middleware.HandleNoRoute)
 
-	router.GET("/v1/user/verify", routes.VerifyUserRoute)
+	router.GET("/v2/user/verify", routes.VerifyUserRoute)
 
 	return router
 }

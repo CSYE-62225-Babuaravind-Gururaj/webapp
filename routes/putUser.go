@@ -91,7 +91,7 @@ func UpdateUserRoute(c *gin.Context) {
 		// Log the successful user update
 		logger.Info().
 			Str("method", "PUT").
-			Str("path", "/v1/user/self").
+			Str("path", "/v2/user/self").
 			Int("status", http.StatusNoContent).
 			Msg("User updated successfully")
 	}

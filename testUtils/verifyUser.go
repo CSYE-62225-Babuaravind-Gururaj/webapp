@@ -17,7 +17,7 @@ func VerifyUserByEmailToken(token string) error {
 	r := router.RouterSetup(database.DB)
 
 	// Call the verify endpoint with the token from the created verification entry
-	req, _ := http.NewRequest("GET", fmt.Sprintf("/v1/user/verify?token=%s", token), nil)
+	req, _ := http.NewRequest("GET", fmt.Sprintf("/v2/user/verify?token=%s", token), nil)
 	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 
