@@ -87,7 +87,7 @@ func CreateUserRoute(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User creation failed"})
 		logger.Error().
 			Str("method", "POST").
-			Str("path", "/v1/user").
+			Str("path", "/v2/user").
 			Int("status", http.StatusBadRequest).
 			Msg("User creation failed")
 		return
@@ -110,7 +110,7 @@ func CreateUserRoute(c *gin.Context) {
 	// Log the successful user creation
 	logger.Info().
 		Str("method", "POST").
-		Str("path", "/v1/user").
+		Str("path", "/v2/user").
 		Int("status", http.StatusCreated).
 		Msg("User created successfully")
 

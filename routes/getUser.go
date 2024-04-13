@@ -68,7 +68,7 @@ func GetUserRoute(c *gin.Context) {
 	// Log the incoming request with zerolog.
 	logger.Info().
 		Str("method", "GET").
-		Str("path", "/v1/user/self").
+		Str("path", "/v2/user/self").
 		Int("status", http.StatusOK).
 		Msg("incoming request")
 }

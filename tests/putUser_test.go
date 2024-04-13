@@ -41,7 +41,7 @@ func TestUpdateUser(t *testing.T) {
 	payloadBytes, _ := json.Marshal(updateInfo)
 	payload := bytes.NewReader(payloadBytes)
 
-	req, _ := http.NewRequest("PUT", "/v1/user/self", payload)
+	req, _ := http.NewRequest("PUT", "/v2/user/self", payload)
 	req.Header.Set("Content-Type", "application/json")
 
 	req.SetBasicAuth(testUser.Username, "Abcd1234")
